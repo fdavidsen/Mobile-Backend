@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 
 class Profile extends StatefulWidget {
@@ -16,9 +16,10 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: context.watch<TodoProvider>().isDark ? Color(0xff1a1a1a) : Color(0xfff0f0f0),
+      color:
+          context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Card(
@@ -26,7 +27,7 @@ class _ProfileState extends State<Profile> {
               child: ListTile(
                 leading: InkWell(
                   child: context.watch<TodoProvider>().getGambar == null
-                      ? CircleAvatar(
+                      ? const CircleAvatar(
                           backgroundColor: Colors.grey,
                           child: Icon(
                             Icons.person,
@@ -53,7 +54,7 @@ class _ProfileState extends State<Profile> {
                         context: context,
                         builder: (BuildContext context) {
                           return Dialog(
-                            insetPadding: EdgeInsets.all(100),
+                            insetPadding: const EdgeInsets.all(100),
                             child: Container(
                               height: 300,
                               child: Column(
@@ -62,11 +63,11 @@ class _ProfileState extends State<Profile> {
                                   Expanded(
                                     child: Container(
                                         color: context.watch<TodoProvider>().isDark
-                                            ? Color(0xff1e1e1e)
+                                            ? const Color(0xff1e1e1e)
                                             : Colors.white,
                                         width: double.infinity,
                                         child: context.watch<TodoProvider>().getGambar == null
-                                            ? CircleAvatar(
+                                            ? const CircleAvatar(
                                                 backgroundColor: Colors.grey,
                                                 child: Icon(
                                                   Icons.person,
@@ -96,14 +97,14 @@ class _ProfileState extends State<Profile> {
                                                 context.read<TodoProvider>().setGambar = null;
                                               });
                                             },
-                                            icon: Icon(Icons.delete, color: Colors.white)),
+                                            icon: const Icon(Icons.delete, color: Colors.white)),
                                         IconButton(
                                             onPressed: () {
                                               setState(() {
                                                 getFromGallery();
                                               });
                                             },
-                                            icon: Icon(Icons.edit, color: Colors.white)),
+                                            icon: const Icon(Icons.edit, color: Colors.white)),
                                       ],
                                     ),
                                   )
@@ -135,7 +136,7 @@ class _ProfileState extends State<Profile> {
             GridView.builder(
                 shrinkWrap: true,
                 itemCount: categories.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
@@ -144,7 +145,7 @@ class _ProfileState extends State<Profile> {
                   return Card(
                     color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -184,11 +185,11 @@ class _ProfileState extends State<Profile> {
             Card(
               color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     SliderTheme(
-                      data: SliderThemeData(
+                      data: const SliderThemeData(
                           thumbShape: RoundSliderThumbShape(disabledThumbRadius: 0),
                           overlayShape: RoundSliderOverlayShape(overlayRadius: 0),
                           disabledActiveTrackColor: Colors.blue,
@@ -202,7 +203,7 @@ class _ProfileState extends State<Profile> {
                         onChanged: null,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       context.watch<TodoProvider>().filteredItems("", false).length.toInt() != 0
                           ? "You still have ${context.watch<TodoProvider>().filteredItems("", false).length.toInt()} task(s) to do"

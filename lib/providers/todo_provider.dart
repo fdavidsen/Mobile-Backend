@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EventTime{
+class EventTime {
   String title = "";
   String subtitle = "";
   String startDate = "";
@@ -9,7 +9,7 @@ class EventTime{
   EventTime(this.title, this.subtitle, this.startDate, this.endDate);
 }
 
-class TodoProvider extends ChangeNotifier{
+class TodoProvider extends ChangeNotifier {
   final List<Map<String, String>> _items = [];
   List<EventTime> eventData = [];
   ImageProvider? gambar;
@@ -19,39 +19,40 @@ class TodoProvider extends ChangeNotifier{
   get getGambar => gambar;
 
   List<Map<String, String>> filteredItems(String filter, bool isDone) {
-    if(filter == ""){
+    if (filter == "") {
       return _items.where((item) => item['isDone'] == isDone.toString()).toList();
-    }
-    else {
-      return _items.where((item) => item['kategori'] == filter && item['isDone'] == isDone.toString()).toList();
+    } else {
+      return _items
+          .where((item) => item['kategori'] == filter && item['isDone'] == isDone.toString())
+          .toList();
     }
   }
 
-  List<EventTime> events(){
+  List<EventTime> events() {
     return eventData;
   }
 
-  set isiTodo(val){
+  set isiTodo(val) {
     _items.add(val);
     notifyListeners();
   }
 
-  set isiEvent(val){
+  set isiEvent(val) {
     eventData.add(val);
     notifyListeners();
   }
 
-  set hapusEvent(val){
+  set hapusEvent(val) {
     eventData.remove(val);
     notifyListeners();
   }
 
-  set setDark(val){
+  set setDark(val) {
     isDark = val;
     notifyListeners();
   }
 
-  set setGambar(val){
+  set setGambar(val) {
     gambar = val;
     notifyListeners();
   }

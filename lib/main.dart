@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:apple_todo/screens/TodoApp.dart';
+import 'package:provider/provider.dart';
+import 'package:apple_todo/screens/todo/home_page.dart';
 import 'package:apple_todo/screens/splash_screen.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
-          home: SplashScreen()),
+          home: const SplashScreen()),
     );
   }
 }
