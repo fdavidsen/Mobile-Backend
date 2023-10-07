@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:apple_todo/streams/stream_manager.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 
 class AddTodo extends StatefulWidget {
@@ -18,6 +19,20 @@ class _AddTodoState extends State<AddTodo> {
   TextEditingController tglMulaiController = TextEditingController();
   TextEditingController tglSelesaiController = TextEditingController();
 
+  late StreamManager streamController;
+
+  @override
+  void initState() {
+    streamController = StreamManager(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    streamController.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +43,8 @@ class _AddTodoState extends State<AddTodo> {
             context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.blue,
       ),
       body: SingleChildScrollView(
-        // width: MediaQuery.of(context).size.width,
-        // height: MediaQuery.of(context).size.height,
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(top: 25, left: 20, right: 20, bottom: 75),
           color: context.watch<TodoProvider>().isDark
               ? const Color(0xff1a1a1a)
               : const Color(0xfff0f0f0),
@@ -55,7 +68,7 @@ class _AddTodoState extends State<AddTodo> {
                         color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     decoration: InputDecoration(
                       label: Text(
-                        "Judul Kegiatan",
+                        "Judul kegiatan",
                         style: TextStyle(
                             color: context.watch<TodoProvider>().isDark
                                 ? Colors.white70
@@ -100,7 +113,7 @@ class _AddTodoState extends State<AddTodo> {
                       color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                   decoration: InputDecoration(
                     label: Text(
-                      "Tambah Keterangan",
+                      "Keterangan kegiatan",
                       style: TextStyle(
                           color:
                               context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
@@ -166,7 +179,7 @@ class _AddTodoState extends State<AddTodo> {
                               context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                       decoration: InputDecoration(
                         label: Text(
-                          'input tanggal mulai',
+                          tglMulaiController.text.isEmpty ? 'Pilih tanggal mulai' : 'Tanggal mulai',
                           style: TextStyle(
                               color: context.watch<TodoProvider>().isDark
                                   ? Colors.white70
@@ -231,7 +244,9 @@ class _AddTodoState extends State<AddTodo> {
                               context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                       decoration: InputDecoration(
                         label: Text(
-                          'input tanggal selesai',
+                          tglSelesaiController.text.isEmpty
+                              ? 'Pilih tanggal selesai'
+                              : 'Tanggal selesai',
                           style: TextStyle(
                               color: context.watch<TodoProvider>().isDark
                                   ? Colors.white70
@@ -348,7 +363,6 @@ class _AddTodoState extends State<AddTodo> {
                   SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: OutlinedButton(
-                        child: const Text("Batal"),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -358,29 +372,28 @@ class _AddTodoState extends State<AddTodo> {
                                 color: context.watch<TodoProvider>().isDark
                                     ? Colors.white
                                     : Colors.blue)),
+                        child: const Text("Batal"),
                       )),
                   SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: ElevatedButton(
-                        child: const Text("Simpan"),
                         onPressed: () {
-                          setState(() {
-                            context.read<TodoProvider>().isiTodo = {
-                              'title': kegiatanController.text,
-                              'keterangan': keteranganController.text,
-                              'mulai': tglMulaiController.text,
-                              'selesai': tglSelesaiController.text,
-                              'isDisplayed': "false",
-                              'isDone': "false",
-                              'kategori': value.toString(),
-                              'color': value.toString() == "Routine"
-                                  ? "0xffff5722"
-                                  : value.toString() == "Work"
-                                      ? "0xff2196f3"
-                                      : "0xff4caf50"
-                            };
-                            Navigator.of(context).pop();
+                          streamController.add({
+                            'title': kegiatanController.text,
+                            'keterangan': keteranganController.text,
+                            'mulai': tglMulaiController.text,
+                            'selesai': tglSelesaiController.text,
+                            'isDisplayed': "false",
+                            'isDone': "false",
+                            'kategori': value.toString(),
+                            'color': value.toString() == "Routine"
+                                ? "0xffff5722"
+                                : value.toString() == "Work"
+                                    ? "0xff2196f3"
+                                    : "0xff4caf50"
                           });
+                          Navigator.of(context).pop();
+
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
@@ -394,7 +407,7 @@ class _AddTodoState extends State<AddTodo> {
                                     alignment: Alignment.center,
                                     clipBehavior: Clip.none,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 180,
                                         width: 250,
                                         child: Padding(
@@ -422,11 +435,11 @@ class _AddTodoState extends State<AddTodo> {
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: const Text("OK"),
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor: Colors.green,
                                                     padding: const EdgeInsets.symmetric(
                                                         vertical: 15, horizontal: 35)),
+                                                child: const Text("OK"),
                                               )
                                             ],
                                           ),
@@ -452,6 +465,7 @@ class _AddTodoState extends State<AddTodo> {
                               });
                         },
                         style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(20)),
+                        child: const Text("Simpan"),
                       )),
                 ],
               ),

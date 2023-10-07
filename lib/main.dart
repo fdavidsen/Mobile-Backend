@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:apple_todo/screens/todo/home_page.dart';
 import 'package:apple_todo/screens/splash_screen.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 

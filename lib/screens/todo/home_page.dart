@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, String>>? workUnfinishedTodoList;
   List<Map<String, String>>? othersUnfinishedTodoList;
 
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
 
   @override
   void dispose() {
@@ -417,14 +417,13 @@ class _HomePageState extends State<HomePage> {
             ? const Color(0xff1a1a1a)
             : const Color(0xfff0f0f0),
         unselectedItemColor: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-        items: [
-          const BottomNavigationBarItem(
+        items: const [
+          BottomNavigationBarItem(
             icon: Icon(Icons.list_alt),
             label: "Todos",
           ),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month_outlined), label: "Calendar"),
-          const BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: "Calendar"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
         onTap: (int index) {
           setState(() {
@@ -455,7 +454,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28),
               child: Text(
-                "By: Rivaldi Lubis",
+                "by Tim Apple",
                 style: TextStyle(
                   color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
                   fontSize: 12,
@@ -472,13 +471,13 @@ class _HomePageState extends State<HomePage> {
                 trailing: Visibility(
                   visible: doneNumber(routineUnfinishedTodoList!) != 0,
                   child: CircleAvatar(
+                    backgroundColor: Colors.deepOrange,
+                    foregroundColor: Colors.white,
+                    radius: 12,
                     child: Text(
                       doneNumber(routineUnfinishedTodoList!).toString(),
                       style: const TextStyle(fontSize: 12),
                     ),
-                    backgroundColor: Colors.deepOrange,
-                    foregroundColor: Colors.white,
-                    radius: 12,
                   ),
                 )),
             ListTile(
@@ -490,13 +489,13 @@ class _HomePageState extends State<HomePage> {
                 trailing: Visibility(
                   visible: doneNumber(workUnfinishedTodoList!) != 0,
                   child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    radius: 12,
                     child: Text(
                       doneNumber(workUnfinishedTodoList!).toString(),
                       style: const TextStyle(fontSize: 12),
                     ),
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    radius: 12,
                   ),
                 )),
             ListTile(
@@ -508,13 +507,13 @@ class _HomePageState extends State<HomePage> {
                 trailing: Visibility(
                   visible: doneNumber(othersUnfinishedTodoList!) != 0,
                   child: CircleAvatar(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    radius: 12,
                     child: Text(
                       doneNumber(othersUnfinishedTodoList!).toString(),
                       style: const TextStyle(fontSize: 12),
                     ),
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    radius: 12,
                   ),
                 )),
             const SizedBox(height: 30),

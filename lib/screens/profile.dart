@@ -118,7 +118,7 @@ class _ProfileState extends State<Profile> {
                 title: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Rivaldi Lubis",
+                    "Tim Apple",
                     style: TextStyle(
                         color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                   ),
