@@ -123,178 +123,275 @@ class _AddTodoState extends State<AddTodo> {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.calendar_month,
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-                      ),
-                      title: Text(
-                        "Tanggal Mulai",
-                        style: TextStyle(
-                            color:
-                                context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: ListTile(
-                      leading: Icon(Icons.calendar_month,
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                      title: Text(
-                        "Tanggal Selesai",
-                        style: TextStyle(
-                            color:
-                                context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                      ),
-                    ),
-                  ),
-                ],
+              ListTile(
+                leading: Icon(
+                  Icons.calendar_month,
+                  color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
+                ),
+                title: Text(
+                  "Tanggal Mulai",
+                  style: TextStyle(
+                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                ),
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: TextField(
-                      controller: tglMulaiController,
-                      style: TextStyle(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                      decoration: InputDecoration(
-                        label: Text(
-                          tglMulaiController.text.isEmpty ? 'Pilih tanggal mulai' : 'Tanggal mulai',
-                          style: TextStyle(
-                              color: context.watch<TodoProvider>().isDark
-                                  ? Colors.white70
-                                  : Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.black)),
-                      ),
-                      onTap: () async {
-                        var selectedDate = DateTime.now();
-                        final DateTime? picked = await showDatePicker(
-                          context: context,
-                          initialDate: selectedDate,
-                          initialDatePickerMode: DatePickerMode.day,
-                          firstDate: DateTime(2015),
-                          lastDate: DateTime(2101),
-                          initialEntryMode: DatePickerEntryMode.calendarOnly,
-                          builder: (context, child) {
-                            return Theme(
-                              data: Theme.of(context).copyWith(
-                                  dialogBackgroundColor: context.watch<TodoProvider>().isDark
-                                      ? const Color(0xff0e0e0e)
-                                      : Colors.white,
-                                  colorScheme: context.watch<TodoProvider>().isDark
-                                      ? const ColorScheme.dark(
-                                          onSurface: Colors.white,
-                                          primary: Colors.blue,
-                                        )
-                                      : const ColorScheme.light(
-                                          onSurface: Colors.black,
-                                          primary: Colors.blue,
-                                        )),
-                              child: child!,
-                            );
-                          },
-                        );
-                        if (picked != null) {
-                          setState(() {
-                            selectedDate = picked;
-                            tglMulaiController.text =
-                                DateFormat("dd MMM yyyy").format(selectedDate);
-                          });
-                        }
-                        FocusManager.instance.primaryFocus?.unfocus();
-                      },
-                    ),
+              TextField(
+                controller: tglMulaiController,
+                style: TextStyle(
+                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                decoration: InputDecoration(
+                  label: Text(
+                    tglMulaiController.text.isEmpty ? 'Pilih tanggal mulai' : 'Tanggal mulai',
+                    style: TextStyle(
+                        color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: TextField(
-                      controller: tglSelesaiController,
-                      style: TextStyle(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
                           color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                      decoration: InputDecoration(
-                        label: Text(
-                          tglSelesaiController.text.isEmpty
-                              ? 'Pilih tanggal selesai'
-                              : 'Tanggal selesai',
-                          style: TextStyle(
-                              color: context.watch<TodoProvider>().isDark
-                                  ? Colors.white70
-                                  : Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.black)),
-                      ),
-                      onTap: () async {
-                        var selectedDate = DateTime.now();
-                        final DateTime? picked = await showDatePicker(
-                          context: context,
-                          initialDate: selectedDate,
-                          initialDatePickerMode: DatePickerMode.day,
-                          firstDate: DateTime(2015),
-                          lastDate: DateTime(2101),
-                          initialEntryMode: DatePickerEntryMode.calendarOnly,
-                          builder: (context, child) {
-                            return Theme(
-                              data: Theme.of(context).copyWith(
-                                  dialogBackgroundColor: context.watch<TodoProvider>().isDark
-                                      ? const Color(0xff0e0e0e)
-                                      : Colors.white,
-                                  colorScheme: context.watch<TodoProvider>().isDark
-                                      ? const ColorScheme.dark(
-                                          onSurface: Colors.white,
-                                          primary: Colors.blue,
-                                        )
-                                      : const ColorScheme.light(
-                                          onSurface: Colors.black,
-                                          primary: Colors.blue,
-                                        )),
-                              child: child!,
-                            );
-                          },
-                        );
-                        if (picked != null) {
-                          setState(() {
-                            selectedDate = picked;
-                            tglSelesaiController.text =
-                                DateFormat("dd MMM yyyy").format(selectedDate);
-                          });
-                        }
-                        FocusManager.instance.primaryFocus?.unfocus();
-                      },
-                    ),
-                  ),
-                ],
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                ),
+                onTap: () async {
+                  var selectedDate = DateTime.now();
+                  final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: selectedDate,
+                    initialDatePickerMode: DatePickerMode.day,
+                    firstDate: DateTime(2015),
+                    lastDate: DateTime(2101),
+                    initialEntryMode: DatePickerEntryMode.calendarOnly,
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                            dialogBackgroundColor: context.watch<TodoProvider>().isDark
+                                ? const Color(0xff0e0e0e)
+                                : Colors.white,
+                            colorScheme: context.watch<TodoProvider>().isDark
+                                ? const ColorScheme.dark(
+                                    onSurface: Colors.white,
+                                    primary: Colors.blue,
+                                  )
+                                : const ColorScheme.light(
+                                    onSurface: Colors.black,
+                                    primary: Colors.blue,
+                                  )),
+                        child: child!,
+                      );
+                    },
+                  );
+                  if (picked != null) {
+                    setState(() {
+                      selectedDate = picked;
+                      tglMulaiController.text = DateFormat("dd MMM yyyy").format(selectedDate);
+                    });
+                  }
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
               ),
+              ListTile(
+                leading: Icon(Icons.calendar_month,
+                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                title: Text(
+                  "Tanggal Selesai",
+                  style: TextStyle(
+                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                ),
+              ),
+              TextField(
+                controller: tglSelesaiController,
+                style: TextStyle(
+                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                decoration: InputDecoration(
+                  label: Text(
+                    tglSelesaiController.text.isEmpty ? 'Pilih tanggal selesai' : 'Tanggal selesai',
+                    style: TextStyle(
+                        color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                ),
+                onTap: () async {
+                  var selectedDate = DateTime.now();
+                  final DateTime? picked = await showDatePicker(
+                    context: context,
+                    initialDate: selectedDate,
+                    initialDatePickerMode: DatePickerMode.day,
+                    firstDate: DateTime(2015),
+                    lastDate: DateTime(2101),
+                    initialEntryMode: DatePickerEntryMode.calendarOnly,
+                    builder: (context, child) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                            dialogBackgroundColor: context.watch<TodoProvider>().isDark
+                                ? const Color(0xff0e0e0e)
+                                : Colors.white,
+                            colorScheme: context.watch<TodoProvider>().isDark
+                                ? const ColorScheme.dark(
+                                    onSurface: Colors.white,
+                                    primary: Colors.blue,
+                                  )
+                                : const ColorScheme.light(
+                                    onSurface: Colors.black,
+                                    primary: Colors.blue,
+                                  )),
+                        child: child!,
+                      );
+                    },
+                  );
+                  if (picked != null) {
+                    setState(() {
+                      selectedDate = picked;
+                      tglSelesaiController.text = DateFormat("dd MMM yyyy").format(selectedDate);
+                    });
+                  }
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     SizedBox(
+              //       width: MediaQuery.of(context).size.width / 2.5,
+              //       child: TextField(
+              //         controller: tglMulaiController,
+              //         style: TextStyle(
+              //             color:
+              //                 context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+              //         decoration: InputDecoration(
+              //           label: Text(
+              //             tglMulaiController.text.isEmpty ? 'Pilih tanggal mulai' : 'Tanggal mulai',
+              //             style: TextStyle(
+              //                 color: context.watch<TodoProvider>().isDark
+              //                     ? Colors.white70
+              //                     : Colors.grey),
+              //           ),
+              //           enabledBorder: OutlineInputBorder(
+              //               borderSide: BorderSide(
+              //                   color: context.watch<TodoProvider>().isDark
+              //                       ? Colors.white
+              //                       : Colors.black)),
+              //           focusedBorder: OutlineInputBorder(
+              //               borderSide: BorderSide(
+              //                   color: context.watch<TodoProvider>().isDark
+              //                       ? Colors.white
+              //                       : Colors.black)),
+              //         ),
+              //         onTap: () async {
+              //           var selectedDate = DateTime.now();
+              //           final DateTime? picked = await showDatePicker(
+              //             context: context,
+              //             initialDate: selectedDate,
+              //             initialDatePickerMode: DatePickerMode.day,
+              //             firstDate: DateTime(2015),
+              //             lastDate: DateTime(2101),
+              //             initialEntryMode: DatePickerEntryMode.calendarOnly,
+              //             builder: (context, child) {
+              //               return Theme(
+              //                 data: Theme.of(context).copyWith(
+              //                     dialogBackgroundColor: context.watch<TodoProvider>().isDark
+              //                         ? const Color(0xff0e0e0e)
+              //                         : Colors.white,
+              //                     colorScheme: context.watch<TodoProvider>().isDark
+              //                         ? const ColorScheme.dark(
+              //                             onSurface: Colors.white,
+              //                             primary: Colors.blue,
+              //                           )
+              //                         : const ColorScheme.light(
+              //                             onSurface: Colors.black,
+              //                             primary: Colors.blue,
+              //                           )),
+              //                 child: child!,
+              //               );
+              //             },
+              //           );
+              //           if (picked != null) {
+              //             setState(() {
+              //               selectedDate = picked;
+              //               tglMulaiController.text =
+              //                   DateFormat("dd MMM yyyy").format(selectedDate);
+              //             });
+              //           }
+              //           FocusManager.instance.primaryFocus?.unfocus();
+              //         },
+              //       ),
+              //     ),
+              //     SizedBox(
+              //       width: MediaQuery.of(context).size.width / 2.5,
+              //       child: TextField(
+              //         controller: tglSelesaiController,
+              //         style: TextStyle(
+              //             color:
+              //                 context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+              //         decoration: InputDecoration(
+              //           label: Text(
+              //             tglSelesaiController.text.isEmpty
+              //                 ? 'Pilih tanggal selesai'
+              //                 : 'Tanggal selesai',
+              //             style: TextStyle(
+              //                 color: context.watch<TodoProvider>().isDark
+              //                     ? Colors.white70
+              //                     : Colors.grey),
+              //           ),
+              //           enabledBorder: OutlineInputBorder(
+              //               borderSide: BorderSide(
+              //                   color: context.watch<TodoProvider>().isDark
+              //                       ? Colors.white
+              //                       : Colors.black)),
+              //           focusedBorder: OutlineInputBorder(
+              //               borderSide: BorderSide(
+              //                   color: context.watch<TodoProvider>().isDark
+              //                       ? Colors.white
+              //                       : Colors.black)),
+              //         ),
+              //         onTap: () async {
+              //           var selectedDate = DateTime.now();
+              //           final DateTime? picked = await showDatePicker(
+              //             context: context,
+              //             initialDate: selectedDate,
+              //             initialDatePickerMode: DatePickerMode.day,
+              //             firstDate: DateTime(2015),
+              //             lastDate: DateTime(2101),
+              //             initialEntryMode: DatePickerEntryMode.calendarOnly,
+              //             builder: (context, child) {
+              //               return Theme(
+              //                 data: Theme.of(context).copyWith(
+              //                     dialogBackgroundColor: context.watch<TodoProvider>().isDark
+              //                         ? const Color(0xff0e0e0e)
+              //                         : Colors.white,
+              //                     colorScheme: context.watch<TodoProvider>().isDark
+              //                         ? const ColorScheme.dark(
+              //                             onSurface: Colors.white,
+              //                             primary: Colors.blue,
+              //                           )
+              //                         : const ColorScheme.light(
+              //                             onSurface: Colors.black,
+              //                             primary: Colors.blue,
+              //                           )),
+              //                 child: child!,
+              //               );
+              //             },
+              //           );
+              //           if (picked != null) {
+              //             setState(() {
+              //               selectedDate = picked;
+              //               tglSelesaiController.text =
+              //                   DateFormat("dd MMM yyyy").format(selectedDate);
+              //             });
+              //           }
+              //           FocusManager.instance.primaryFocus?.unfocus();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
               const SizedBox(height: 50),
               ListTile(
                 leading: Icon(
