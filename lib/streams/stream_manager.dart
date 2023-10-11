@@ -14,14 +14,14 @@ class StreamManager {
     _controller = StreamController();
     _streamSubscription = _controller.stream.listen((data) {
       prov.isiTodo = {
-        'title': data['title'].toString(),
-        'keterangan': data['keterangan'].toString(),
-        'mulai': data['mulai'].toString(),
-        'selesai': data['selesai'].toString(),
-        'isDisplayed': data['isDisplayed'].toString(),
-        'isDone': data['isDone'].toString(),
-        'kategori': data['kategori'].toString(),
-        'color': data['color'].toString()
+        'title': data['title'] as String,
+        'keterangan': data['keterangan'] as String,
+        'mulai': data['mulai'] as String,
+        'selesai': data['selesai'] as String,
+        'isDisplayed': data['isDisplayed'] as String,
+        'isDone': data['isDone'] as String,
+        'kategori': data['kategori'] as String,
+        'color': data['color'] as String
       };
     });
   }

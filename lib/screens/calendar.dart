@@ -20,9 +20,10 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: context.watch<TodoProvider>().isDark ? Color(0xff1a1a1a) : Color(0xfff0f0f0),
+      // color:
+      // context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
       child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           child: Column(
             children: [
               TableCalendar(
@@ -47,7 +48,8 @@ class _CalendarState extends State<Calendar> {
                         color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     weekendTextStyle: TextStyle(
                         color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                    todayDecoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle)),
+                    todayDecoration:
+                        const BoxDecoration(color: Colors.blue, shape: BoxShape.circle)),
                 daysOfWeekStyle: DaysOfWeekStyle(
                   weekdayStyle: TextStyle(
                       color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
@@ -73,7 +75,7 @@ class _CalendarState extends State<Calendar> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: context.watch<TodoProvider>().isDark
-                                    ? Color(0xff0e0e0e)
+                                    ? const Color(0xff0e0e0e)
                                     : Colors.white,
                                 content: Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -109,7 +111,7 @@ class _CalendarState extends State<Calendar> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 16),
+                                      const SizedBox(height: 16),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
@@ -139,7 +141,7 @@ class _CalendarState extends State<Calendar> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 16),
+                                      const SizedBox(height: 16),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
@@ -181,15 +183,15 @@ class _CalendarState extends State<Calendar> {
                                                   data: Theme.of(context).copyWith(
                                                       dialogBackgroundColor:
                                                           context.watch<TodoProvider>().isDark
-                                                              ? Color(0xff0e0e0e)
+                                                              ? const Color(0xff0e0e0e)
                                                               : Colors.white,
                                                       colorScheme:
                                                           context.watch<TodoProvider>().isDark
-                                                              ? ColorScheme.dark(
+                                                              ? const ColorScheme.dark(
                                                                   onSurface: Colors.white,
                                                                   primary: Colors.blue,
                                                                 )
-                                                              : ColorScheme.light(
+                                                              : const ColorScheme.light(
                                                                   onSurface: Colors.black,
                                                                   primary: Colors.blue,
                                                                 )),
@@ -208,7 +210,7 @@ class _CalendarState extends State<Calendar> {
                                           },
                                         ),
                                       ),
-                                      SizedBox(height: 16),
+                                      const SizedBox(height: 16),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
@@ -250,15 +252,15 @@ class _CalendarState extends State<Calendar> {
                                                   data: Theme.of(context).copyWith(
                                                       dialogBackgroundColor:
                                                           context.watch<TodoProvider>().isDark
-                                                              ? Color(0xff0e0e0e)
+                                                              ? const Color(0xff0e0e0e)
                                                               : Colors.white,
                                                       colorScheme:
                                                           context.watch<TodoProvider>().isDark
-                                                              ? ColorScheme.dark(
+                                                              ? const ColorScheme.dark(
                                                                   onSurface: Colors.white,
                                                                   primary: Colors.blue,
                                                                 )
-                                                              : ColorScheme.light(
+                                                              : const ColorScheme.light(
                                                                   onSurface: Colors.black,
                                                                   primary: Colors.blue,
                                                                 )),
@@ -285,7 +287,8 @@ class _CalendarState extends State<Calendar> {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: Text("CANCEL", style: TextStyle(color: Colors.grey))),
+                                      child: const Text("CANCEL",
+                                          style: TextStyle(color: Colors.grey))),
                                   TextButton(
                                       onPressed: () {
                                         setState(() {
@@ -297,7 +300,7 @@ class _CalendarState extends State<Calendar> {
                                           Navigator.of(context).pop();
                                         });
                                       },
-                                      child: Text("SET")),
+                                      child: const Text("SET")),
                                 ],
                               );
                             });
@@ -348,7 +351,7 @@ class _CalendarState extends State<Calendar> {
                               ],
                             ),
                             trailing: IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.remove_circle_outline,
                                 color: Colors.red,
                               ),

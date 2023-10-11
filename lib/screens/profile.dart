@@ -24,168 +24,180 @@ class _ProfileState extends State<Profile> {
           children: [
             Card(
               color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
-              child: ListTile(
-                leading: InkWell(
-                  child: context.watch<TodoProvider>().getGambar == null
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          child: Icon(
-                            Icons.person,
-                            color: Colors.white,
-                          ),
-                        )
-                      : CircleAvatar(
-                          backgroundImage: context.watch<TodoProvider>().getGambar,
-                        ),
-                  onTap: () {
-                    getFromGallery() async {
-                      XFile? pickedFile = await ImagePicker().pickImage(
-                        source: ImageSource.gallery,
-                      );
-                      if (pickedFile != null) {
-                        final bytes = await pickedFile.readAsBytes();
-                        setState(() {
-                          context.read<TodoProvider>().setGambar = MemoryImage(bytes);
-                        });
-                      }
-                    }
-
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            insetPadding: const EdgeInsets.all(100),
-                            child: Container(
-                              height: 300,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                        color: context.watch<TodoProvider>().isDark
-                                            ? const Color(0xff1e1e1e)
-                                            : Colors.white,
-                                        width: double.infinity,
-                                        child: context.watch<TodoProvider>().getGambar == null
-                                            ? const CircleAvatar(
-                                                backgroundColor: Colors.grey,
-                                                child: Icon(
-                                                  Icons.person,
-                                                  color: Colors.white,
-                                                  size: 200,
-                                                ),
-                                              )
-                                            : Expanded(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                    image: context.watch<TodoProvider>().getGambar!,
-                                                    fit: BoxFit.cover,
-                                                  )),
-                                                ),
-                                              )),
-                                  ),
-                                  Container(
-                                    color: Colors.blue,
-                                    height: 50,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                context.read<TodoProvider>().setGambar = null;
-                                              });
-                                            },
-                                            icon: const Icon(Icons.delete, color: Colors.white)),
-                                        IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                getFromGallery();
-                                              });
-                                            },
-                                            icon: const Icon(Icons.edit, color: Colors.white)),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: ListTile(
+                  leading: InkWell(
+                    child: context.watch<TodoProvider>().getGambar == null
+                        ? const CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            child: Icon(
+                              Icons.person,
+                              color: Colors.white,
                             ),
-                          );
-                        });
-                  },
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Tim Apple",
-                    style: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                          )
+                        : CircleAvatar(
+                            backgroundImage: context.watch<TodoProvider>().getGambar,
+                          ),
+                    onTap: () {
+                      getFromGallery() async {
+                        XFile? pickedFile = await ImagePicker().pickImage(
+                          source: ImageSource.gallery,
+                        );
+                        if (pickedFile != null) {
+                          final bytes = await pickedFile.readAsBytes();
+                          setState(() {
+                            context.read<TodoProvider>().setGambar = MemoryImage(bytes);
+                          });
+                        }
+                      }
+
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              insetPadding: const EdgeInsets.all(35),
+                              child: SizedBox(
+                                height: 300,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                          color: context.watch<TodoProvider>().isDark
+                                              ? const Color(0xff1e1e1e)
+                                              : Colors.white,
+                                          width: double.infinity,
+                                          child: context.watch<TodoProvider>().getGambar == null
+                                              ? const CircleAvatar(
+                                                  backgroundColor: Colors.grey,
+                                                  child: Icon(
+                                                    Icons.person,
+                                                    color: Colors.white,
+                                                    size: 200,
+                                                  ),
+                                                )
+                                              : Expanded(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                      image:
+                                                          context.watch<TodoProvider>().getGambar!,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                  ),
+                                                )),
+                                    ),
+                                    Container(
+                                      color: Colors.blue,
+                                      height: 50,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  context.read<TodoProvider>().setGambar = null;
+                                                });
+                                              },
+                                              icon: const Icon(Icons.delete, color: Colors.white)),
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  getFromGallery();
+                                                });
+                                              },
+                                              icon: const Icon(Icons.edit, color: Colors.white)),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    },
                   ),
-                ),
-                subtitle: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Task finished: ${context.watch<TodoProvider>().filteredItems("", true).length}",
-                    style: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  title: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Text(
+                      "Tim Apple",
+                      style: TextStyle(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Text(
+                      "Task finished: ${context.watch<TodoProvider>().filteredItems("", true).length}",
+                      style: TextStyle(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                    ),
                   ),
                 ),
               ),
             ),
-            GridView.builder(
-                shrinkWrap: true,
-                itemCount: categories.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                ),
-                itemBuilder: (context, index) {
-                  return Card(
-                    color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            categories[index],
-                            style: TextStyle(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.black),
-                          ),
-                          Text(
-                            context
-                                .watch<TodoProvider>()
-                                .filteredItems(categories[index], true)
-                                .length
-                                .toString(),
-                            style: TextStyle(
-                                color: categories[index] == "Routine"
-                                    ? Colors.deepOrange
-                                    : categories[index] == "Work"
-                                        ? Colors.blue
-                                        : Colors.green,
-                                fontSize: 60),
-                          ),
-                          Text(
-                            "Finished",
-                            style: TextStyle(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.black),
-                          ),
-                        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: categories.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              categories[index],
+                              style: TextStyle(
+                                  color: context.watch<TodoProvider>().isDark
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 12),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2),
+                              child: Text(
+                                context
+                                    .watch<TodoProvider>()
+                                    .filteredItems(categories[index], true)
+                                    .length
+                                    .toString(),
+                                style: TextStyle(
+                                    color: categories[index] == "Routine"
+                                        ? Colors.deepOrange
+                                        : categories[index] == "Work"
+                                            ? Colors.blue
+                                            : Colors.green,
+                                    fontSize: 38),
+                              ),
+                            ),
+                            Text(
+                              "Finished",
+                              style: TextStyle(
+                                  color: context.watch<TodoProvider>().isDark
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+            ),
             Card(
               color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
                     SliderTheme(

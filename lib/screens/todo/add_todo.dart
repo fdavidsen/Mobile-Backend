@@ -60,32 +60,25 @@ class _AddTodoState extends State<AddTodo> {
                   style: TextStyle(
                       color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
-                trailing: SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: TextField(
-                    controller: kegiatanController,
+              ),
+              TextField(
+                controller: kegiatanController,
+                style: TextStyle(
+                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                decoration: InputDecoration(
+                  label: Text(
+                    "Judul kegiatan",
                     style: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                    decoration: InputDecoration(
-                      label: Text(
-                        "Judul kegiatan",
-                        style: TextStyle(
-                            color: context.watch<TodoProvider>().isDark
-                                ? Colors.white70
-                                : Colors.grey),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: context.watch<TodoProvider>().isDark
-                                  ? Colors.white
-                                  : Colors.black)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: context.watch<TodoProvider>().isDark
-                                  ? Colors.white
-                                  : Colors.black)),
-                    ),
+                        color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color:
+                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                 ),
               ),
               const SizedBox(
@@ -100,9 +93,7 @@ class _AddTodoState extends State<AddTodo> {
                       color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
               ),
-              const SizedBox(height: 5),
               SizedBox(
-                width: MediaQuery.of(context).size.width / 1.2,
                 height: 100,
                 child: TextField(
                   controller: keteranganController,
@@ -307,7 +298,7 @@ class _AddTodoState extends State<AddTodo> {
               const SizedBox(height: 50),
               ListTile(
                 leading: Icon(
-                  Icons.list_alt_outlined,
+                  Icons.local_activity_outlined,
                   color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
                 ),
                 title: Text(
@@ -316,7 +307,6 @@ class _AddTodoState extends State<AddTodo> {
                       color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
                 trailing: SizedBox(
-                    width: MediaQuery.of(context).size.width / 2,
                     child: DropdownButton(
                         dropdownColor:
                             context.watch<TodoProvider>().isDark ? Colors.black : Colors.white,

@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 0), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {
           return const HomePage();
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Material(
                 color: Colors.transparent,
                 child: Text(
-                  'To Do App',
+                  'Todo App',
                   style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
                 ))
           ],

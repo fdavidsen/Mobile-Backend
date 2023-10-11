@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
       create: (context) => TodoProvider(),
       child: MaterialApp(
           title: 'ToDo App',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: ThemeData(primarySwatch: Colors.blue),
           debugShowCheckedModeBanner: false,
           home: const SplashScreen()),
     );
