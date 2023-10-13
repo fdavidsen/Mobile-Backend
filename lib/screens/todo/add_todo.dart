@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:apple_todo/streams/stream_manager.dart';
+import 'package:apple_todo/models/database_manager.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 
 class AddTodo extends StatefulWidget {
-  const AddTodo({Key? key}) : super(key: key);
+  final DBManager dbManager;
+
+  const AddTodo({Key? key, required this.dbManager}) : super(key: key);
 
   @override
   State<AddTodo> createState() => _AddTodoState();
@@ -23,7 +26,7 @@ class _AddTodoState extends State<AddTodo> {
 
   @override
   void initState() {
-    streamController = StreamManager(context);
+    streamController = StreamManager(context, widget.dbManager);
     super.initState();
   }
 

@@ -1,3 +1,4 @@
+import 'package:apple_todo/models/database_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:apple_todo/screens/todo/add_todo.dart';
@@ -33,7 +34,23 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, String>>? workUnfinishedTodoList;
   List<Map<String, String>>? othersUnfinishedTodoList;
 
+  late DBManager _dbManager;
   final PageController _pageController = PageController(initialPage: 0);
+  void _initializeDatabase() async {
+    await _dbManager.openDB();
+    // Now you can proceed with other database operations or code that depends on the database being open.
+  }
+
+  @override
+  void initState() {
+    _dbManager = DBManager();
+    print('db cons');
+    _initializeDatabase();
+    _dbManager.getAllTodo().then((value) {
+      print(value);
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -43,6 +60,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _dbManager.getAllTodo().then((value) {
+      // context.read<TodoProvider>().isiTodo = value;
+      print(value);
+    });
+
     allUnfinishedTodoList = context.watch<TodoProvider>().filteredItems("", false);
     routineUnfinishedTodoList = context.watch<TodoProvider>().filteredItems("Routine", false);
     workUnfinishedTodoList = context.watch<TodoProvider>().filteredItems("Work", false);
@@ -470,7 +492,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {
-                return const AddTodo();
+                return AddTodo(dbManager: _dbManager);
               },
             ));
           },
