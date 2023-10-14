@@ -10,7 +10,7 @@ class EventTime {
 }
 
 class TodoProvider extends ChangeNotifier {
-  final List<Map<String, String>> _items = [];
+  List<Map<String, String>> _items = [];
   List<EventTime> eventData = [];
   ImageProvider? gambar;
 
@@ -22,14 +22,17 @@ class TodoProvider extends ChangeNotifier {
     if (filter == "") {
       return _items.where((item) => item['isDone'] == isDone.toString()).toList();
     } else {
-      return _items
-          .where((item) => item['kategori'] == filter && item['isDone'] == isDone.toString())
-          .toList();
+      return _items.where((item) => item['kategori'] == filter && item['isDone'] == isDone.toString()).toList();
     }
   }
 
   List<EventTime> events() {
     return eventData;
+  }
+
+  set setAllTodo(List<Map<String, String>> data) {
+    _items = data;
+    notifyListeners();
   }
 
   set isiTodo(val) {
@@ -54,6 +57,26 @@ class TodoProvider extends ChangeNotifier {
 
   set setGambar(val) {
     gambar = val;
+    notifyListeners();
+  }
+
+  void updateTodo(String id, Map<String, String> dataMap) {
+    _items = _items.map((item) {
+      if (item['id'] == id) {
+        return {...dataMap, 'id': id};
+      }
+      return item;
+    }).toList();
+    notifyListeners();
+  }
+
+  void deleteTodo(String id) {
+    _items = _items.where((item) => item['id'] != id.toString()).toList();
+    notifyListeners();
+  }
+
+  void deleteAllTodo() {
+    _items = [];
     notifyListeners();
   }
 }

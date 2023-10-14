@@ -10,10 +10,10 @@ class StreamManager {
   late StreamController _controller;
   late StreamSubscription _streamSubscription;
 
-  StreamManager(BuildContext context, DBManager dbManager) {
+  StreamManager(BuildContext context) {
     final prov = Provider.of<TodoProvider>(context, listen: false);
 
-    _dbManager = dbManager;
+    _dbManager = DBManager();
     _controller = StreamController();
 
     _streamSubscription = _controller.stream.listen((data) async {
@@ -28,7 +28,8 @@ class StreamManager {
         'color': data['color'] as String
       };
 
-      await _dbManager.insertTodo(newData);
+      int id = await _dbManager.insertTodo(newData);
+      newData['id'] = id.toString();
       prov.isiTodo = newData;
     });
   }

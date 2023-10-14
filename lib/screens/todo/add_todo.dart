@@ -1,14 +1,19 @@
+import 'package:apple_todo/models/database_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:apple_todo/streams/stream_manager.dart';
-import 'package:apple_todo/models/database_manager.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 
 class AddTodo extends StatefulWidget {
-  final DBManager dbManager;
+  final bool isAddNew;
+  final Map<String, String> data;
 
-  const AddTodo({Key? key, required this.dbManager}) : super(key: key);
+  const AddTodo({
+    Key? key,
+    required this.isAddNew,
+    this.data = const {},
+  }) : super(key: key);
 
   @override
   State<AddTodo> createState() => _AddTodoState();
@@ -22,11 +27,20 @@ class _AddTodoState extends State<AddTodo> {
   TextEditingController tglMulaiController = TextEditingController();
   TextEditingController tglSelesaiController = TextEditingController();
 
+  late DBManager dbManager;
   late StreamManager streamController;
 
   @override
   void initState() {
-    streamController = StreamManager(context, widget.dbManager);
+    dbManager = DBManager();
+    streamController = StreamManager(context);
+    if (!widget.isAddNew) {
+      kegiatanController.text = widget.data['title']!;
+      keteranganController.text = widget.data['keterangan']!;
+      tglMulaiController.text = widget.data['mulai']!;
+      tglSelesaiController.text = widget.data['selesai']!;
+      value = widget.data['kategori']!;
+    }
     super.initState();
   }
 
@@ -42,15 +56,12 @@ class _AddTodoState extends State<AddTodo> {
       appBar: AppBar(
         title: const Text("Todos"),
         centerTitle: true,
-        backgroundColor:
-            context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.blue,
+        backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.only(top: 25, left: 20, right: 20, bottom: 75),
-          color: context.watch<TodoProvider>().isDark
-              ? const Color(0xff1a1a1a)
-              : const Color(0xfff0f0f0),
+          color: context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
           child: Column(
             children: [
               ListTile(
@@ -60,40 +71,31 @@ class _AddTodoState extends State<AddTodo> {
                 ),
                 title: Text(
                   "Kegiatan",
-                  style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
               ),
               TextField(
                 controller: kegiatanController,
-                style: TextStyle(
-                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 decoration: InputDecoration(
                   label: Text(
                     "Judul kegiatan",
-                    style: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
+                    style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  enabledBorder:
+                      OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  focusedBorder:
+                      OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
               ListTile(
-                leading: Icon(Icons.list,
-                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                leading: Icon(Icons.list, color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 title: Text(
                   "Keterangan",
-                  style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
               ),
               SizedBox(
@@ -103,25 +105,16 @@ class _AddTodoState extends State<AddTodo> {
                   textAlignVertical: TextAlignVertical.center,
                   expands: true,
                   maxLines: null,
-                  style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                   decoration: InputDecoration(
                     label: Text(
                       "Keterangan kegiatan",
-                      style: TextStyle(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
+                      style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: context.watch<TodoProvider>().isDark
-                                ? Colors.white
-                                : Colors.black)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: context.watch<TodoProvider>().isDark
-                                ? Colors.white
-                                : Colors.black)),
+                    enabledBorder:
+                        OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                    focusedBorder:
+                        OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                   ),
                 ),
               ),
@@ -133,34 +126,26 @@ class _AddTodoState extends State<AddTodo> {
                 ),
                 title: Text(
                   "Tanggal Mulai",
-                  style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
               ),
               TextField(
                 controller: tglMulaiController,
-                style: TextStyle(
-                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 decoration: InputDecoration(
                   label: Text(
                     tglMulaiController.text.isEmpty ? 'Pilih tanggal mulai' : 'Tanggal mulai',
-                    style: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
+                    style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  enabledBorder:
+                      OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  focusedBorder:
+                      OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                 ),
                 onTap: () async {
-                  var selectedDate = DateTime.now();
                   final DateTime? picked = await showDatePicker(
                     context: context,
-                    initialDate: selectedDate,
+                    initialDate: tglMulaiController.text.isNotEmpty ? DateFormat('dd MMM yyyy').parse(tglMulaiController.text) : DateTime.now(),
                     initialDatePickerMode: DatePickerMode.day,
                     firstDate: DateTime(2015),
                     lastDate: DateTime(2101),
@@ -168,9 +153,7 @@ class _AddTodoState extends State<AddTodo> {
                     builder: (context, child) {
                       return Theme(
                         data: Theme.of(context).copyWith(
-                            dialogBackgroundColor: context.watch<TodoProvider>().isDark
-                                ? const Color(0xff0e0e0e)
-                                : Colors.white,
+                            dialogBackgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
                             colorScheme: context.watch<TodoProvider>().isDark
                                 ? const ColorScheme.dark(
                                     onSurface: Colors.white,
@@ -186,46 +169,36 @@ class _AddTodoState extends State<AddTodo> {
                   );
                   if (picked != null) {
                     setState(() {
-                      selectedDate = picked;
-                      tglMulaiController.text = DateFormat("dd MMM yyyy").format(selectedDate);
+                      tglMulaiController.text = DateFormat("dd MMM yyyy").format(picked);
                     });
                   }
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.calendar_month,
-                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                leading: Icon(Icons.calendar_month, color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 title: Text(
                   "Tanggal Selesai",
-                  style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
               ),
               TextField(
                 controller: tglSelesaiController,
-                style: TextStyle(
-                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 decoration: InputDecoration(
                   label: Text(
                     tglSelesaiController.text.isEmpty ? 'Pilih tanggal selesai' : 'Tanggal selesai',
-                    style: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
+                    style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white70 : Colors.grey),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  enabledBorder:
+                      OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
+                  focusedBorder:
+                      OutlineInputBorder(borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                 ),
                 onTap: () async {
-                  var selectedDate = DateTime.now();
                   final DateTime? picked = await showDatePicker(
                     context: context,
-                    initialDate: selectedDate,
+                    initialDate: tglSelesaiController.text.isNotEmpty ? DateFormat('dd MMM yyyy').parse(tglSelesaiController.text) : DateTime.now(),
                     initialDatePickerMode: DatePickerMode.day,
                     firstDate: DateTime(2015),
                     lastDate: DateTime(2101),
@@ -233,9 +206,7 @@ class _AddTodoState extends State<AddTodo> {
                     builder: (context, child) {
                       return Theme(
                         data: Theme.of(context).copyWith(
-                            dialogBackgroundColor: context.watch<TodoProvider>().isDark
-                                ? const Color(0xff0e0e0e)
-                                : Colors.white,
+                            dialogBackgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
                             colorScheme: context.watch<TodoProvider>().isDark
                                 ? const ColorScheme.dark(
                                     onSurface: Colors.white,
@@ -251,150 +222,12 @@ class _AddTodoState extends State<AddTodo> {
                   );
                   if (picked != null) {
                     setState(() {
-                      selectedDate = picked;
-                      tglSelesaiController.text = DateFormat("dd MMM yyyy").format(selectedDate);
+                      tglSelesaiController.text = DateFormat("dd MMM yyyy").format(picked);
                     });
                   }
                   FocusManager.instance.primaryFocus?.unfocus();
                 },
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     SizedBox(
-              //       width: MediaQuery.of(context).size.width / 2.5,
-              //       child: TextField(
-              //         controller: tglMulaiController,
-              //         style: TextStyle(
-              //             color:
-              //                 context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-              //         decoration: InputDecoration(
-              //           label: Text(
-              //             tglMulaiController.text.isEmpty ? 'Pilih tanggal mulai' : 'Tanggal mulai',
-              //             style: TextStyle(
-              //                 color: context.watch<TodoProvider>().isDark
-              //                     ? Colors.white70
-              //                     : Colors.grey),
-              //           ),
-              //           enabledBorder: OutlineInputBorder(
-              //               borderSide: BorderSide(
-              //                   color: context.watch<TodoProvider>().isDark
-              //                       ? Colors.white
-              //                       : Colors.black)),
-              //           focusedBorder: OutlineInputBorder(
-              //               borderSide: BorderSide(
-              //                   color: context.watch<TodoProvider>().isDark
-              //                       ? Colors.white
-              //                       : Colors.black)),
-              //         ),
-              //         onTap: () async {
-              //           var selectedDate = DateTime.now();
-              //           final DateTime? picked = await showDatePicker(
-              //             context: context,
-              //             initialDate: selectedDate,
-              //             initialDatePickerMode: DatePickerMode.day,
-              //             firstDate: DateTime(2015),
-              //             lastDate: DateTime(2101),
-              //             initialEntryMode: DatePickerEntryMode.calendarOnly,
-              //             builder: (context, child) {
-              //               return Theme(
-              //                 data: Theme.of(context).copyWith(
-              //                     dialogBackgroundColor: context.watch<TodoProvider>().isDark
-              //                         ? const Color(0xff0e0e0e)
-              //                         : Colors.white,
-              //                     colorScheme: context.watch<TodoProvider>().isDark
-              //                         ? const ColorScheme.dark(
-              //                             onSurface: Colors.white,
-              //                             primary: Colors.blue,
-              //                           )
-              //                         : const ColorScheme.light(
-              //                             onSurface: Colors.black,
-              //                             primary: Colors.blue,
-              //                           )),
-              //                 child: child!,
-              //               );
-              //             },
-              //           );
-              //           if (picked != null) {
-              //             setState(() {
-              //               selectedDate = picked;
-              //               tglMulaiController.text =
-              //                   DateFormat("dd MMM yyyy").format(selectedDate);
-              //             });
-              //           }
-              //           FocusManager.instance.primaryFocus?.unfocus();
-              //         },
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: MediaQuery.of(context).size.width / 2.5,
-              //       child: TextField(
-              //         controller: tglSelesaiController,
-              //         style: TextStyle(
-              //             color:
-              //                 context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-              //         decoration: InputDecoration(
-              //           label: Text(
-              //             tglSelesaiController.text.isEmpty
-              //                 ? 'Pilih tanggal selesai'
-              //                 : 'Tanggal selesai',
-              //             style: TextStyle(
-              //                 color: context.watch<TodoProvider>().isDark
-              //                     ? Colors.white70
-              //                     : Colors.grey),
-              //           ),
-              //           enabledBorder: OutlineInputBorder(
-              //               borderSide: BorderSide(
-              //                   color: context.watch<TodoProvider>().isDark
-              //                       ? Colors.white
-              //                       : Colors.black)),
-              //           focusedBorder: OutlineInputBorder(
-              //               borderSide: BorderSide(
-              //                   color: context.watch<TodoProvider>().isDark
-              //                       ? Colors.white
-              //                       : Colors.black)),
-              //         ),
-              //         onTap: () async {
-              //           var selectedDate = DateTime.now();
-              //           final DateTime? picked = await showDatePicker(
-              //             context: context,
-              //             initialDate: selectedDate,
-              //             initialDatePickerMode: DatePickerMode.day,
-              //             firstDate: DateTime(2015),
-              //             lastDate: DateTime(2101),
-              //             initialEntryMode: DatePickerEntryMode.calendarOnly,
-              //             builder: (context, child) {
-              //               return Theme(
-              //                 data: Theme.of(context).copyWith(
-              //                     dialogBackgroundColor: context.watch<TodoProvider>().isDark
-              //                         ? const Color(0xff0e0e0e)
-              //                         : Colors.white,
-              //                     colorScheme: context.watch<TodoProvider>().isDark
-              //                         ? const ColorScheme.dark(
-              //                             onSurface: Colors.white,
-              //                             primary: Colors.blue,
-              //                           )
-              //                         : const ColorScheme.light(
-              //                             onSurface: Colors.black,
-              //                             primary: Colors.blue,
-              //                           )),
-              //                 child: child!,
-              //               );
-              //             },
-              //           );
-              //           if (picked != null) {
-              //             setState(() {
-              //               selectedDate = picked;
-              //               tglSelesaiController.text =
-              //                   DateFormat("dd MMM yyyy").format(selectedDate);
-              //             });
-              //           }
-              //           FocusManager.instance.primaryFocus?.unfocus();
-              //         },
-              //       ),
-              //     ),
-              //   ],
-              // ),
               const SizedBox(height: 50),
               ListTile(
                 leading: Icon(
@@ -403,41 +236,30 @@ class _AddTodoState extends State<AddTodo> {
                 ),
                 title: Text(
                   "Kegiatan",
-                  style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
                 trailing: SizedBox(
                     child: DropdownButton(
-                        dropdownColor:
-                            context.watch<TodoProvider>().isDark ? Colors.black : Colors.white,
+                        dropdownColor: context.watch<TodoProvider>().isDark ? Colors.black : Colors.white,
                         value: value,
                         items: [
                           DropdownMenuItem(
                               value: "Routine",
                               child: Text(
                                 "Routine",
-                                style: TextStyle(
-                                    color: context.watch<TodoProvider>().isDark
-                                        ? Colors.white
-                                        : Colors.black),
+                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                               )),
                           DropdownMenuItem(
                               value: "Work",
                               child: Text(
                                 "Work",
-                                style: TextStyle(
-                                    color: context.watch<TodoProvider>().isDark
-                                        ? Colors.white
-                                        : Colors.black),
+                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                               )),
                           DropdownMenuItem(
                               value: "Others",
                               child: Text(
                                 "Others",
-                                style: TextStyle(
-                                    color: context.watch<TodoProvider>().isDark
-                                        ? Colors.white
-                                        : Colors.black),
+                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                               )),
                         ],
                         onChanged: (val) {
@@ -458,17 +280,14 @@ class _AddTodoState extends State<AddTodo> {
                         },
                         style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.all(20),
-                            side: BorderSide(
-                                color: context.watch<TodoProvider>().isDark
-                                    ? Colors.white
-                                    : Colors.blue)),
+                            side: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.blue)),
                         child: const Text("Batal"),
                       )),
                   SizedBox(
                       width: MediaQuery.of(context).size.width / 2.5,
                       child: ElevatedButton(
                         onPressed: () {
-                          streamController.add({
+                          Map<String, String> data = {
                             'title': kegiatanController.text,
                             'keterangan': keteranganController.text,
                             'mulai': tglMulaiController.text,
@@ -481,18 +300,22 @@ class _AddTodoState extends State<AddTodo> {
                                 : value.toString() == "Work"
                                     ? "0xff2196f3"
                                     : "0xff4caf50"
-                          });
+                          };
+
+                          if (widget.isAddNew) {
+                            streamController.add(data);
+                          } else {
+                            dbManager.updateTodo(widget.data['id']!, data);
+                            context.read<TodoProvider>().updateTodo(widget.data['id']!, data);
+                          }
                           Navigator.of(context).pop();
 
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return Dialog(
-                                  backgroundColor: context.watch<TodoProvider>().isDark
-                                      ? const Color(0xff0e0e0e)
-                                      : Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+                                  backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                                   child: Stack(
                                     alignment: Alignment.center,
                                     clipBehavior: Clip.none,
@@ -508,17 +331,13 @@ class _AddTodoState extends State<AddTodo> {
                                                   style: TextStyle(
                                                       fontSize: 20,
                                                       fontWeight: FontWeight.bold,
-                                                      color: !context.watch<TodoProvider>().isDark
-                                                          ? const Color(0xff0e0e0e)
-                                                          : Colors.white),
+                                                      color: !context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white),
                                                   textAlign: TextAlign.center),
                                               const SizedBox(height: 10),
-                                              Text("Kegiatan berhasil ditambahkan",
+                                              Text(widget.isAddNew ? "Kegiatan berhasil ditambahkan" : "Kegiatan berhasil diupdate",
                                                   style: TextStyle(
                                                       fontSize: 14,
-                                                      color: !context.watch<TodoProvider>().isDark
-                                                          ? const Color(0xff0e0e0e)
-                                                          : Colors.white),
+                                                      color: !context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white),
                                                   textAlign: TextAlign.center),
                                               const SizedBox(height: 20),
                                               ElevatedButton(
@@ -526,9 +345,7 @@ class _AddTodoState extends State<AddTodo> {
                                                   Navigator.of(context).pop();
                                                 },
                                                 style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.green,
-                                                    padding: const EdgeInsets.symmetric(
-                                                        vertical: 15, horizontal: 35)),
+                                                    backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
                                                 child: const Text("OK"),
                                               )
                                             ],
@@ -539,14 +356,11 @@ class _AddTodoState extends State<AddTodo> {
                                           top: -45,
                                           child: CircleAvatar(
                                             radius: 40,
-                                            backgroundColor: context.watch<TodoProvider>().isDark
-                                                ? const Color(0xff0e0e0e)
-                                                : Colors.white,
+                                            backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
                                             child: const CircleAvatar(
                                               backgroundColor: Colors.green,
                                               radius: 35,
-                                              child:
-                                                  Icon(Icons.check, size: 40, color: Colors.white),
+                                              child: Icon(Icons.check, size: 40, color: Colors.white),
                                             ),
                                           )),
                                     ],
@@ -555,7 +369,7 @@ class _AddTodoState extends State<AddTodo> {
                               });
                         },
                         style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(20)),
-                        child: const Text("Simpan"),
+                        child: Text(widget.isAddNew ? "Simpan" : "Update"),
                       )),
                 ],
               ),
