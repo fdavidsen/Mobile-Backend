@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
+import 'package:apple_todo/utilities/constants.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -34,27 +35,18 @@ class _CalendarState extends State<Calendar> {
                   formatButtonVisible: false,
                   titleCentered: true,
                   formatButtonShowsNext: false,
-                  titleTextStyle: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                  leftChevronIcon: Icon(Icons.navigate_before,
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                  rightChevronIcon: Icon(Icons.navigate_next,
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  titleTextStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  leftChevronIcon: Icon(Icons.navigate_before, color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  rightChevronIcon: Icon(Icons.navigate_next, color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
                 calendarStyle: CalendarStyle(
-                    defaultTextStyle: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                    todayTextStyle: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                    weekendTextStyle: TextStyle(
-                        color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                    todayDecoration:
-                        const BoxDecoration(color: Colors.blue, shape: BoxShape.circle)),
+                    defaultTextStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                    todayTextStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                    weekendTextStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                    todayDecoration: const BoxDecoration(color: Colors.blue, shape: BoxShape.circle)),
                 daysOfWeekStyle: DaysOfWeekStyle(
-                  weekdayStyle: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                  weekendStyle: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  weekdayStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                  weekendStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                 ),
               ),
               Padding(
@@ -64,9 +56,7 @@ class _CalendarState extends State<Calendar> {
                   children: [
                     Text(
                       "Event",
-                      style: TextStyle(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                      style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                     IconButton(
                       onPressed: () {
@@ -74,9 +64,7 @@ class _CalendarState extends State<Calendar> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                backgroundColor: context.watch<TodoProvider>().isDark
-                                    ? const Color(0xff0e0e0e)
-                                    : Colors.white,
+                                backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
                                 content: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Column(
@@ -86,28 +74,16 @@ class _CalendarState extends State<Calendar> {
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
                                           controller: judulController,
-                                          style: TextStyle(
-                                              color: context.watch<TodoProvider>().isDark
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                          style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Nama Event',
-                                              style: TextStyle(
-                                                  color: context.watch<TodoProvider>().isDark
-                                                      ? Colors.white
-                                                      : Colors.black),
+                                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                             focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                           ),
                                         ),
                                       ),
@@ -116,28 +92,16 @@ class _CalendarState extends State<Calendar> {
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
                                           controller: additionalController,
-                                          style: TextStyle(
-                                              color: context.watch<TodoProvider>().isDark
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                          style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Keterangan tambahan',
-                                              style: TextStyle(
-                                                  color: context.watch<TodoProvider>().isDark
-                                                      ? Colors.white
-                                                      : Colors.black),
+                                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                             focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                           ),
                                         ),
                                       ),
@@ -146,28 +110,16 @@ class _CalendarState extends State<Calendar> {
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
                                           controller: tglMulaiController,
-                                          style: TextStyle(
-                                              color: context.watch<TodoProvider>().isDark
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                          style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Tanggal mulai',
-                                              style: TextStyle(
-                                                  color: context.watch<TodoProvider>().isDark
-                                                      ? Colors.white
-                                                      : Colors.black),
+                                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                             focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                           ),
                                           onTap: () async {
                                             var selectedDate = DateTime.now();
@@ -182,19 +134,16 @@ class _CalendarState extends State<Calendar> {
                                                 return Theme(
                                                   data: Theme.of(context).copyWith(
                                                       dialogBackgroundColor:
-                                                          context.watch<TodoProvider>().isDark
-                                                              ? const Color(0xff0e0e0e)
-                                                              : Colors.white,
-                                                      colorScheme:
-                                                          context.watch<TodoProvider>().isDark
-                                                              ? const ColorScheme.dark(
-                                                                  onSurface: Colors.white,
-                                                                  primary: Colors.blue,
-                                                                )
-                                                              : const ColorScheme.light(
-                                                                  onSurface: Colors.black,
-                                                                  primary: Colors.blue,
-                                                                )),
+                                                          context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
+                                                      colorScheme: context.watch<TodoProvider>().isDark
+                                                          ? const ColorScheme.dark(
+                                                              onSurface: Colors.white,
+                                                              primary: Colors.blue,
+                                                            )
+                                                          : const ColorScheme.light(
+                                                              onSurface: Colors.black,
+                                                              primary: Colors.blue,
+                                                            )),
                                                   child: child!,
                                                 );
                                               },
@@ -202,8 +151,7 @@ class _CalendarState extends State<Calendar> {
                                             if (picked != null) {
                                               setState(() {
                                                 selectedDate = picked;
-                                                tglMulaiController.text =
-                                                    DateFormat("dd MMM yyyy").format(selectedDate);
+                                                tglMulaiController.text = DateFormat(datetimeFormat).format(selectedDate);
                                               });
                                             }
                                             FocusManager.instance.primaryFocus?.unfocus();
@@ -215,28 +163,16 @@ class _CalendarState extends State<Calendar> {
                                         width: MediaQuery.of(context).size.width / 2.5,
                                         child: TextField(
                                           controller: tglSelesaiController,
-                                          style: TextStyle(
-                                              color: context.watch<TodoProvider>().isDark
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                          style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Tanggal selesai',
-                                              style: TextStyle(
-                                                  color: context.watch<TodoProvider>().isDark
-                                                      ? Colors.white
-                                                      : Colors.black),
+                                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                             focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: context.watch<TodoProvider>().isDark
-                                                        ? Colors.white
-                                                        : Colors.black)),
+                                                borderSide: BorderSide(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                                           ),
                                           onTap: () async {
                                             var selectedDate = DateTime.now();
@@ -251,19 +187,16 @@ class _CalendarState extends State<Calendar> {
                                                 return Theme(
                                                   data: Theme.of(context).copyWith(
                                                       dialogBackgroundColor:
-                                                          context.watch<TodoProvider>().isDark
-                                                              ? const Color(0xff0e0e0e)
-                                                              : Colors.white,
-                                                      colorScheme:
-                                                          context.watch<TodoProvider>().isDark
-                                                              ? const ColorScheme.dark(
-                                                                  onSurface: Colors.white,
-                                                                  primary: Colors.blue,
-                                                                )
-                                                              : const ColorScheme.light(
-                                                                  onSurface: Colors.black,
-                                                                  primary: Colors.blue,
-                                                                )),
+                                                          context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
+                                                      colorScheme: context.watch<TodoProvider>().isDark
+                                                          ? const ColorScheme.dark(
+                                                              onSurface: Colors.white,
+                                                              primary: Colors.blue,
+                                                            )
+                                                          : const ColorScheme.light(
+                                                              onSurface: Colors.black,
+                                                              primary: Colors.blue,
+                                                            )),
                                                   child: child!,
                                                 );
                                               },
@@ -271,8 +204,7 @@ class _CalendarState extends State<Calendar> {
                                             if (picked != null) {
                                               setState(() {
                                                 selectedDate = picked;
-                                                tglSelesaiController.text =
-                                                    DateFormat("dd MMM yyyy").format(selectedDate);
+                                                tglSelesaiController.text = DateFormat(datetimeFormat).format(selectedDate);
                                               });
                                             }
                                             FocusManager.instance.primaryFocus?.unfocus();
@@ -287,16 +219,12 @@ class _CalendarState extends State<Calendar> {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
-                                      child: const Text("CANCEL",
-                                          style: TextStyle(color: Colors.grey))),
+                                      child: const Text("CANCEL", style: TextStyle(color: Colors.grey))),
                                   TextButton(
                                       onPressed: () {
                                         setState(() {
                                           context.read<TodoProvider>().isiEvent = EventTime(
-                                              judulController.text,
-                                              additionalController.text,
-                                              tglMulaiController.text,
-                                              tglSelesaiController.text);
+                                              judulController.text, additionalController.text, tglMulaiController.text, tglSelesaiController.text);
                                           Navigator.of(context).pop();
                                         });
                                       },
@@ -323,30 +251,20 @@ class _CalendarState extends State<Calendar> {
                           return ListTile(
                             title: Text(
                               context.watch<TodoProvider>().events()[index].title,
-                              style: TextStyle(
-                                  color: context.watch<TodoProvider>().isDark
-                                      ? Colors.white
-                                      : Colors.black),
+                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                             ),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   context.watch<TodoProvider>().events()[index].subtitle,
-                                  style: TextStyle(
-                                      color: context.watch<TodoProvider>().isDark
-                                          ? Colors.white54
-                                          : Colors.black54),
+                                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
                                 ),
                                 Text(
-                                  context.watch<TodoProvider>().events()[index].startDate ==
-                                          context.watch<TodoProvider>().events()[index].endDate
-                                      ? "${context.watch<TodoProvider>().events()[index].endDate}"
+                                  context.watch<TodoProvider>().events()[index].startDate == context.watch<TodoProvider>().events()[index].endDate
+                                      ? context.watch<TodoProvider>().events()[index].endDate
                                       : "${context.watch<TodoProvider>().events()[index].startDate} - ${context.watch<TodoProvider>().events()[index].endDate}",
-                                  style: TextStyle(
-                                      color: context.watch<TodoProvider>().isDark
-                                          ? Colors.white54
-                                          : Colors.black54),
+                                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
                                 ),
                               ],
                             ),
@@ -357,8 +275,7 @@ class _CalendarState extends State<Calendar> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  context.read<TodoProvider>().hapusEvent =
-                                      context.read<TodoProvider>().events()[index];
+                                  context.read<TodoProvider>().hapusEvent = context.read<TodoProvider>().events()[index];
                                 });
                               },
                             ),

@@ -1,9 +1,10 @@
-import 'package:apple_todo/models/database_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:apple_todo/streams/stream_manager.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
+import 'package:apple_todo/models/database_manager.dart';
+import 'package:apple_todo/utilities/constants.dart';
 
 class AddTodo extends StatefulWidget {
   final bool isAddNew;
@@ -145,7 +146,7 @@ class _AddTodoState extends State<AddTodo> {
                 onTap: () async {
                   final DateTime? picked = await showDatePicker(
                     context: context,
-                    initialDate: tglMulaiController.text.isNotEmpty ? DateFormat('dd MMM yyyy').parse(tglMulaiController.text) : DateTime.now(),
+                    initialDate: tglMulaiController.text.isNotEmpty ? DateFormat(datetimeFormat).parse(tglMulaiController.text) : DateTime.now(),
                     initialDatePickerMode: DatePickerMode.day,
                     firstDate: DateTime(2015),
                     lastDate: DateTime(2101),
@@ -169,7 +170,7 @@ class _AddTodoState extends State<AddTodo> {
                   );
                   if (picked != null) {
                     setState(() {
-                      tglMulaiController.text = DateFormat("dd MMM yyyy").format(picked);
+                      tglMulaiController.text = DateFormat(datetimeFormat).format(picked);
                     });
                   }
                   FocusManager.instance.primaryFocus?.unfocus();
@@ -198,7 +199,7 @@ class _AddTodoState extends State<AddTodo> {
                 onTap: () async {
                   final DateTime? picked = await showDatePicker(
                     context: context,
-                    initialDate: tglSelesaiController.text.isNotEmpty ? DateFormat('dd MMM yyyy').parse(tglSelesaiController.text) : DateTime.now(),
+                    initialDate: tglSelesaiController.text.isNotEmpty ? DateFormat(datetimeFormat).parse(tglSelesaiController.text) : DateTime.now(),
                     initialDatePickerMode: DatePickerMode.day,
                     firstDate: DateTime(2015),
                     lastDate: DateTime(2101),
@@ -222,7 +223,7 @@ class _AddTodoState extends State<AddTodo> {
                   );
                   if (picked != null) {
                     setState(() {
-                      tglSelesaiController.text = DateFormat("dd MMM yyyy").format(picked);
+                      tglSelesaiController.text = DateFormat(datetimeFormat).format(picked);
                     });
                   }
                   FocusManager.instance.primaryFocus?.unfocus();

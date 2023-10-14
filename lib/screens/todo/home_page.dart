@@ -1,13 +1,16 @@
 import 'dart:async';
 
-import 'package:apple_todo/models/database_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quickalert/quickalert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:apple_todo/screens/todo/add_todo.dart';
 import 'package:apple_todo/screens/calendar.dart';
 import 'package:apple_todo/screens/profile.dart';
+import 'package:apple_todo/models/database_manager.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
-import 'package:quickalert/quickalert.dart';
+import 'package:apple_todo/utilities/constants.dart';
+import 'package:apple_todo/widgets/drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,7 +43,19 @@ class _HomePageState extends State<HomePage> {
   bool _dbIsLoaded = false;
   final DBManager _dbManager = DBManager();
 
+  late SharedPreferences prefs;
   final PageController _pageController = PageController(initialPage: 0);
+
+  Future<void> _getDarkMode() async {
+    prefs = await SharedPreferences.getInstance();
+    context.read<TodoProvider>().setDark = prefs.getBool(sharedPreferencesKeyDarkMode) ?? false;
+  }
+
+  @override
+  void initState() {
+    _getDarkMode();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -92,16 +107,6 @@ class _HomePageState extends State<HomePage> {
       } else {
         return allUnfinishedTodoList;
       }
-    }
-
-    int doneNumber(List<Map<String, String>> listByCategory) {
-      int num = 0;
-      for (int i = 0; i < listByCategory.length; i++) {
-        if (listByCategory[i]["isDone"] == "false") {
-          num++;
-        }
-      }
-      return num;
     }
 
     return Scaffold(
@@ -507,119 +512,13 @@ class _HomePageState extends State<HomePage> {
           });
         },
       ),
-      drawer: Drawer(
-        backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.white,
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          width: 40,
-                          margin: const EdgeInsets.only(right: 10),
-                          child: ClipRRect(borderRadius: BorderRadius.circular(4), child: Image.asset('assets/logo.png'))),
-                      Text(
-                        "Todo App",
-                        style: TextStyle(
-                            color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    "by Tim Apple",
-                    style: TextStyle(
-                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Divider(
-              indent: 12,
-              endIndent: 12,
-              color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-            ),
-            ListTile(
-                title: Text(
-                  "Personal",
-                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                ),
-                trailing: Visibility(
-                  visible: doneNumber(routineUnfinishedTodoList!) != 0,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.deepOrange,
-                    foregroundColor: Colors.white,
-                    radius: 12,
-                    child: Text(
-                      doneNumber(routineUnfinishedTodoList!).toString(),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                )),
-            ListTile(
-                title: Text(
-                  "Work",
-                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                ),
-                trailing: Visibility(
-                  visible: doneNumber(workUnfinishedTodoList!) != 0,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    radius: 12,
-                    child: Text(
-                      doneNumber(workUnfinishedTodoList!).toString(),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                )),
-            ListTile(
-                title: Text(
-                  "Others",
-                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                ),
-                trailing: Visibility(
-                  visible: doneNumber(othersUnfinishedTodoList!) != 0,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    radius: 12,
-                    child: Text(
-                      doneNumber(othersUnfinishedTodoList!).toString(),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                )),
-            Divider(
-              indent: 12,
-              endIndent: 12,
-              color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-            ),
-            ListTile(
-              title: Text(
-                "Dark Mode",
-                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-              ),
-              trailing: Switch(
-                value: context.watch<TodoProvider>().isDark,
-                activeColor: Colors.white,
-                onChanged: (value) {
-                  setState(() {
-                    context.read<TodoProvider>().setDark = value;
-                  });
-                },
-              ),
-            )
-          ],
-        ),
+      drawer: MyDrawer(
+        routineUnfinishedTodoList: routineUnfinishedTodoList!,
+        routineFinishedTodoList: routineFinishedTodoList!,
+        workUnfinishedTodoList: workUnfinishedTodoList!,
+        workFinishedTodoList: workFinishedTodoList!,
+        othersUnfinishedTodoList: othersUnfinishedTodoList!,
+        othersFinishedTodoList: othersFinishedTodoList!,
       ),
     );
   }
