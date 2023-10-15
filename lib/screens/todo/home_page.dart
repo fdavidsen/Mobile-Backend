@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     if (!_dbIsLoaded) {
-      Timer.periodic(const Duration(seconds: 1), (timer) async {
+      Timer.periodic(const Duration(milliseconds: 100), (timer) async {
         if (_dbManager.db != null) {
           context.read<TodoProvider>().setAllTodo = await _dbManager.getAllTodo();
           _dbIsLoaded = true;
@@ -119,22 +119,24 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.blue,
         actions: [
-          IconButton(
-              onPressed: () {
-                QuickAlert.show(
-                    context: context,
-                    type: QuickAlertType.warning,
-                    title: 'Hapus semua task?',
-                    confirmBtnText: 'Hapus',
-                    cancelBtnText: 'Tutup',
-                    showCancelBtn: true,
-                    onConfirmBtnTap: () {
-                      _dbManager.deleteAllTodo();
-                      context.read<TodoProvider>().deleteAllTodo();
-                      Navigator.pop(context);
-                    });
-              },
-              icon: const Icon(Icons.delete_forever_outlined))
+          _selectedIndex == 0
+              ? IconButton(
+                  onPressed: () {
+                    QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.warning,
+                        title: 'Hapus semua task?',
+                        confirmBtnText: 'Hapus',
+                        cancelBtnText: 'Tutup',
+                        showCancelBtn: true,
+                        onConfirmBtnTap: () {
+                          _dbManager.deleteAllTodo();
+                          context.read<TodoProvider>().deleteAllTodo();
+                          Navigator.pop(context);
+                        });
+                  },
+                  icon: const Icon(Icons.delete_forever_outlined))
+              : Container()
         ],
       ),
       body: Container(

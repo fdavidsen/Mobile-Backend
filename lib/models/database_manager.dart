@@ -1,11 +1,13 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:apple_todo/models/event_time_model.dart';
 
 class DBManager {
   Database? _database;
   final String _table_todo = 'todo';
+  final String _table_event = 'event';
   final String _db_name = 'apple_todo.db';
-  final int _db_version = 1;
+  final int _db_version = 3;
 
   DBManager() {
     _openDB();
@@ -27,7 +29,16 @@ class DBManager {
             isDisplayed TEXT,
             isDone TEXT,
             kategori TEXT,
-            color TEXT)
+            color TEXT);
+        ''');
+
+        await db.execute('''
+          CREATE TABLE $_table_event
+            (id INTEGER PRIMARY KEY,
+            title TEXT,
+            subtitle TEXT,
+            start_date TEXT,
+            end_date TEXT);
         ''');
       },
       version: _db_version,
@@ -91,5 +102,43 @@ class DBManager {
 
   Future<void> deleteAllTodo() async {
     await _database?.delete(_table_todo);
+  }
+
+  Future<int> insertEvent(data) async {
+    return await _database!.insert(
+      _table_event,
+      data.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<EventTime>> getAllEvent() async {
+    if (_database != null) {
+      final List<Map<String, dynamic>> maps = await _database!.query(_table_event);
+
+      return List.generate(maps.length, (index) {
+        EventTime temp = EventTime(
+          maps[index]['title'],
+          maps[index]['subtitle'],
+          maps[index]['start_date'],
+          maps[index]['end_date'],
+        );
+        temp.id = maps[index]['id'].toString();
+        return temp;
+      });
+    }
+    return [];
+  }
+
+  Future<void> deleteEvent(String id) async {
+    await _database?.delete(
+      _table_event,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<void> deleteAllEvent() async {
+    await _database?.delete(_table_event);
   }
 }

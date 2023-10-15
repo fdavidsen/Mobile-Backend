@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-
-class EventTime {
-  String title = "";
-  String subtitle = "";
-  String startDate = "";
-  String endDate = "";
-
-  EventTime(this.title, this.subtitle, this.startDate, this.endDate);
-}
+import 'package:apple_todo/models/event_time_model.dart';
 
 class TodoProvider extends ChangeNotifier {
   List<Map<String, String>> _items = [];
@@ -40,6 +32,11 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  set setAllEvent(List<EventTime> data) {
+    eventData = data;
+    notifyListeners();
+  }
+
   set isiEvent(val) {
     eventData.add(val);
     notifyListeners();
@@ -47,6 +44,11 @@ class TodoProvider extends ChangeNotifier {
 
   set hapusEvent(val) {
     eventData.remove(val);
+    notifyListeners();
+  }
+
+  void deleteAllEvent() {
+    eventData = [];
     notifyListeners();
   }
 
