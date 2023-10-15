@@ -291,67 +291,73 @@ class _CalendarState extends State<Calendar> {
               ],
             ),
           ),
-          if (context.watch<TodoProvider>().events().isNotEmpty)
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: context.watch<TodoProvider>().events().length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15, bottom: 18, left: 12),
-                        color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
-                        child: ListTile(
-                          title: Text(
-                            context.watch<TodoProvider>().events()[index].title,
-                            style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                context.watch<TodoProvider>().events()[index].subtitle,
-                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
-                              ),
-                              Text(
-                                context.watch<TodoProvider>().events()[index].startDate == context.watch<TodoProvider>().events()[index].endDate
-                                    ? context.watch<TodoProvider>().events()[index].endDate
-                                    : "${context.watch<TodoProvider>().events()[index].startDate} - ${context.watch<TodoProvider>().events()[index].endDate}",
-                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
-                              ),
-                            ],
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(
-                              Icons.remove_circle_outline,
-                              color: Colors.red,
+          context.watch<TodoProvider>().events().isNotEmpty
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: context.watch<TodoProvider>().events().length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 15, bottom: 18, left: 12),
+                          color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              context.watch<TodoProvider>().events()[index].title,
+                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                             ),
-                            onPressed: () {
-                              QuickAlert.show(
-                                  context: context,
-                                  type: QuickAlertType.warning,
-                                  title: 'Hapus event ini?',
-                                  confirmBtnText: 'Hapus',
-                                  cancelBtnText: 'Tutup',
-                                  showCancelBtn: true,
-                                  onConfirmBtnTap: () {
-                                    EventTime event = context.read<TodoProvider>().events()[index];
-                                    _dbManager.deleteEvent(event.id);
-                                    setState(() {
-                                      context.read<TodoProvider>().hapusEvent = event;
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  context.watch<TodoProvider>().events()[index].subtitle,
+                                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
+                                ),
+                                Text(
+                                  context.watch<TodoProvider>().events()[index].startDate == context.watch<TodoProvider>().events()[index].endDate
+                                      ? context.watch<TodoProvider>().events()[index].endDate
+                                      : "${context.watch<TodoProvider>().events()[index].startDate} - ${context.watch<TodoProvider>().events()[index].endDate}",
+                                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
+                                ),
+                              ],
+                            ),
+                            trailing: IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+                                QuickAlert.show(
+                                    context: context,
+                                    type: QuickAlertType.warning,
+                                    title: 'Hapus event ini?',
+                                    confirmBtnText: 'Hapus',
+                                    cancelBtnText: 'Tutup',
+                                    showCancelBtn: true,
+                                    onConfirmBtnTap: () {
+                                      EventTime event = context.read<TodoProvider>().events()[index];
+                                      _dbManager.deleteEvent(event.id);
+                                      setState(() {
+                                        context.read<TodoProvider>().hapusEvent = event;
+                                      });
+                                      Navigator.pop(context);
                                     });
-                                    Navigator.pop(context);
-                                  });
-                            },
+                              },
+                            ),
+                            // isThreeLine: true,
                           ),
-                          // isThreeLine: true,
                         ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  })
+              : Column(children: [
+                  Container(width: 200, margin: const EdgeInsets.only(bottom: 20), child: Image.asset('assets/no-event.png')),
+                  Text('Tidak ada event',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16, color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black))
+                ]),
         ],
       ),
     );
