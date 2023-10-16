@@ -249,6 +249,11 @@ class _CalendarState extends State<Calendar> {
                                           tglSelesaiController.text,
                                         );
 
+                                        judulController.text = '';
+                                        additionalController.text = '';
+                                        tglMulaiController.text = '';
+                                        tglSelesaiController.text = '';
+
                                         int id = await _dbManager.insertEvent(data);
                                         data.id = id.toString();
 

@@ -341,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 tilePadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                                                childrenPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                                                childrenPadding: const EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 25),
                                                 iconColor: Color(int.parse(returnFinishedTodo()![index]['color']!)),
                                                 textColor: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
                                                 collapsedTextColor: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
