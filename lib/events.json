@@ -1,0 +1,829 @@
+{
+    "status": "OK",
+    "request_id": "1d133f04-edfd-48c3-82b7-d8702f949197",
+    "parameters": {
+      "query": "concerts in san-francisco",
+      "start": 0
+    },
+    "data": [
+      {
+        "event_id": "/g/11ks90nx5x",
+        "name": "eaJ - In Insomnia Tour",
+        "link": "https://www.augusthallsf.com/event/13483118/eaj-in-insomnia-tour/",
+        "description": "Eaj - In Insomnia Tour is happening on Sunday November 05 2023 at 07 00PM PDT at August Hall.To access further details about this event Click on the provided website link. Moreover if you re interes...",
+        "start_time": "2023-11-05 00:00:00",
+        "end_time": "2023-11-05 20:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://citysparkstorage.blob.core.windows.net/portalimages/portalimages/8a350b6d-9355-453a-a057-2cf510047709.large.png",
+        "ticket_links": [
+          {
+            "source": "Event Tickets Center",
+            "link": "https://www.eventticketscenter.com/eaj-san-francisco-11-05-2023/5870806/t"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "August Hall",
+            "link": "https://www.augusthallsf.com/event/13483118/eaj-in-insomnia-tour/"
+          },
+          {
+            "source": "Spotify",
+            "link": "https://open.spotify.com/concert/7EMUXQJC2RYhqhqCxStysc"
+          },
+          {
+            "source": "KRON4",
+            "link": "https://www.kron4.com/community/calendar/?_escaped_fragment_=/show/?start=2022-05-29#!/details/Eaj-In-Insomnia-Tour/12335675/2023-11-05T19"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/11/5/eaj-tickets"
+          },
+          {
+            "source": "Undercover Tourist",
+            "link": "https://www.undercovertourist.com/san-francisco/august-hall/eaj-tickets/2368486/"
+          }
+        ],
+        "venue": {
+          "google_id": "0x8085808ef9f24ce5:0xc1b64fe9abf9792b",
+          "name": "August Hall",
+          "phone_number": "+14158725745",
+          "website": "http://www.augusthallsf.com/",
+          "review_count": 783,
+          "rating": 4.6,
+          "subtype": "live_music_venue",
+          "subtypes": [
+            "live_music_venue",
+            "art",
+            "culture",
+            "dancing",
+            "discos_and_night_clubs",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "music",
+            "night_club",
+            "nightlife",
+            "performing_arts",
+            "public_api_establishment"
+          ],
+          "full_address": "420 Mason Street, San Francisco, CA 94102, United States",
+          "latitude": 37.78762,
+          "longitude": -122.40981,
+          "street_number": "420",
+          "street": "Mason Street",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/g/11f3c1fw_d"
+        },
+        "tags": [
+          "concert",
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11v9mkg87m",
+        "name": "Everglow",
+        "link": "https://open.spotify.com/concert/5Bt0uZeNLtU9K16EbVhzCw",
+        "description": "Everglow is happening on Monday November 20 2023 at 07 30PM PST at Warfield.To access further details about this event Click on the provided website link. Moreover if you re interested in exploring ...",
+        "start_time": "2023-11-20 19:30:00",
+        "end_time": "2023-11-20 21:30:00",
+        "is_virtual": false,
+        "thumbnail": "https://s1.ticketm.net/dam/a/58b/b8a74d18-45e3-42b7-8dc9-17ce7f88558b_SOURCE",
+        "ticket_links": [
+          {
+            "source": "AXS.com",
+            "link": "https://www.axs.com/uk/events/499307/2023-everglow-us-tour-all-my-girls-tickets"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "Spotify",
+            "link": "https://open.spotify.com/concert/5Bt0uZeNLtU9K16EbVhzCw"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/11/20/2023-everglow-us-tour-all-my-girls-tickets"
+          },
+          {
+            "source": "Undercover Tourist",
+            "link": "https://www.undercovertourist.com/san-francisco/the-warfield/everglow-tickets/2395528/"
+          },
+          {
+            "source": "AXS",
+            "link": "https://axs.calreplyapp.com/axs/subscription/marketing?externalEventId=499307"
+          },
+          {
+            "source": "San Francisco Theater",
+            "link": "https://www.san-francisco-theater.com/theaters/the-warfield/tickets.php?eventName=Everglow&cmsEventId=&month=11&year=2023"
+          }
+        ],
+        "venue": {
+          "google_id": "0x80858085a9d7abdb:0x70d2c0624acc91fa",
+          "name": "The Warfield",
+          "phone_number": "+14153450900",
+          "website": "http://www.thewarfieldtheatre.com/",
+          "review_count": 3088,
+          "rating": 4.5,
+          "subtype": "concert_hall",
+          "subtypes": [
+            "concert_hall",
+            "art",
+            "auditorium",
+            "culture",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "hall",
+            "live_music_venue",
+            "music",
+            "nightlife",
+            "performing_arts",
+            "public_api_establishment"
+          ],
+          "full_address": "982 Market Street, San Francisco, CA 94102, United States",
+          "latitude": 37.782673,
+          "longitude": -122.41043,
+          "street_number": "982",
+          "street": "Market Street",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/m/02pp_7j"
+        },
+        "tags": [
+          "concert",
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11kqh5jycb",
+        "name": "ZHU - The Grace Tour 2023",
+        "link": "https://billgrahamcivic.com/events/zhu-231020",
+        "description": "18 AND OVER ONLY. Vaccination with booster, if eligible, is recommended for attending this event. Masks also recommended for duration of event. Requirements are subject to change. COVID Warning: An inherent risk of exposure to COVID-19 exists in any place where people gather. You assume all risks, hazards, and dangers arising from or relating in any way to the risk of contracting COVID-19 or any other communicable disease or illness, whether occurring before, during, or after the event, however caused or contracted, and voluntarily waive all claims and potential claims against the Event Organizers, and their affiliated companies relating to such risks. You expressly agree to comply with all laws and the rules of the Event Organizers when attending the event.",
+        "start_time": "2023-10-20 20:00:00",
+        "end_time": "2023-10-21 00:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://citysparkstorage.blob.core.windows.net/portalimages/portalimages/9a01b316-1378-4c7e-a527-3917c04eb7ad.large.png",
+        "ticket_links": [
+          {
+            "source": "Bill Graham Civic Auditorium",
+            "link": "https://www.sanfranciscoauditorium.com/events/zhu/"
+          },
+          {
+            "source": "NIGHTOUT",
+            "link": "https://nightout.com/events/a/zhu-bill-graham-civic-auditorium-san-francisco-fri-oct-20-2023"
+          },
+          {
+            "source": "Event Tickets Center",
+            "link": "https://www.eventticketscenter.com/zhu-san-francisco-10-20-2023/5767248/t"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "Bill Graham Civic Auditorium",
+            "link": "https://billgrahamcivic.com/events/zhu-231020"
+          },
+          {
+            "source": "Club Quarters Hotels",
+            "link": "https://clubquartershotels.com/events/zhu-bb158df6-635b-5233-93ae-abc6b30c3914"
+          },
+          {
+            "source": "Spotify",
+            "link": "https://open.spotify.com/concert/4eMed3OrP7pC22EVgJBZZN"
+          },
+          {
+            "source": "KRON4",
+            "link": "https://www.kron4.com/community/calendar/?_escaped_fragment_=/show/?ser=Apcera#!/details/Zhu/12242214/2023-10-20T19"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/10/20/zhu-channel-tres-dj-set-tickets"
+          }
+        ],
+        "venue": {
+          "google_id": "0x8085809be90f0637:0xd558ef250f4addf9",
+          "name": "Bill Graham Civic Auditorium",
+          "phone_number": "+14156248900",
+          "website": "http://www.billgrahamcivic.com/",
+          "review_count": 3261,
+          "rating": 4.5,
+          "subtype": "live_music_venue",
+          "subtypes": [
+            "live_music_venue",
+            "art",
+            "auditorium",
+            "business_related",
+            "business_service",
+            "concert_hall",
+            "conference_center",
+            "convention_center",
+            "culture",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "hall",
+            "meeting_and_conference_facilities",
+            "music",
+            "nightlife",
+            "performing_arts",
+            "places_of_interest",
+            "public_api_establishment",
+            "rental",
+            "services",
+            "stage"
+          ],
+          "full_address": "99 Grove Street, San Francisco, CA 94102, United States",
+          "latitude": 37.778145,
+          "longitude": -122.41734,
+          "street_number": "99",
+          "street": "Grove Street",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/m/0bp9hl"
+        },
+        "tags": [
+          "concert",
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11kr6jtn9k",
+        "name": "Music For Families",
+        "link": "https://dothebay.com/events/2023/12/2/music-for-families-tickets",
+        "description": "Buy San Francisco Symphony - Music For Families in San Francisco tickets from Vivid Seats for the concert on 12/02/2023 and shop with confidence thanks to our 100% Buyer Guarantee.",
+        "start_time": "2023-12-02 14:00:00",
+        "end_time": "2023-12-03 02:00:00",
+        "is_virtual": false,
+        "ticket_links": [
+          {
+            "source": "Vivid Seats",
+            "link": "https://www.vividseats.com/san-francisco-symphony-tickets-san-francisco-davies-symphony-hall-12-2-2023--concerts-classical/production/4498330"
+          },
+          {
+            "source": "SeatGeek",
+            "link": "https://seatgeek.com/san-francisco-symphony-tickets/orchestral/2023-12-02-2-pm/6198167"
+          },
+          {
+            "source": "TicketSmarter",
+            "link": "https://www.ticketsmarter.com/e/san-francisco-symphony-daniel-bartholomew-poyser-music-for-families-tickets-san-francisco-12-2-2023-davies-symphony-hall/5822982"
+          },
+          {
+            "source": "Empire Tickets",
+            "link": "https://www.empiretickets.com/events/classical_tickets/5822982/san_francisco_symphony_daniel_bartholomew-poyser_-_music_for_families_2023-12-02_14_00_00"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/12/2/music-for-families-tickets"
+          },
+          {
+            "source": "Expedia.com",
+            "link": "https://www.expedia.com/event-tickets/event/event/san-francisco-symphony-daniel-bartholomew-poyser-music-for-families-tickets-davies-symphony-hall-san-francisco-ca-12-2-2023-5822982"
+          },
+          {
+            "source": "Ticketmaster",
+            "link": "https://www.ticketmaster.com/san-francisco-symphony-san-francisco-12-02-2023/event/Z7r9jZ1AdPIP6"
+          },
+          {
+            "source": "AARP Local",
+            "link": "https://local.aarp.org/event/san-francisco-symphony-2023-12-02-tm-san-francisco-ca.html"
+          },
+          {
+            "source": "NIGHTOUT",
+            "link": "https://nightout.com/events/a/san-francisco-symphony-music-for-families-davies-symphony-hall-san-francisco-sat-dec-02-2023"
+          }
+        ],
+        "venue": {
+          "google_id": "0x808580991be02fd9:0xc60bb460e5f31987",
+          "name": "Louise M. Davies Symphony Hall",
+          "phone_number": "+14158646000",
+          "website": "https://www.sfsymphony.org/",
+          "review_count": 311,
+          "rating": 4.8,
+          "subtype": "concert_hall",
+          "subtypes": [
+            "concert_hall",
+            "art",
+            "auditorium",
+            "culture",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "hall",
+            "live_music_venue",
+            "music",
+            "nightlife",
+            "performing_arts",
+            "public_api_establishment"
+          ],
+          "full_address": "201 Van Ness Avenue, San Francisco, CA 94102, United States",
+          "latitude": 37.77793,
+          "longitude": -122.42081,
+          "street_number": "201",
+          "street": "Van Ness Avenue",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/g/11hcdwbfxd"
+        },
+        "tags": [
+          "concert",
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11kqj6w_s5",
+        "name": "Kim Petras: Feed The Beast World Tour",
+        "link": "https://billgrahamcivic.com/events/kim-petras-231029",
+        "description": "Vaccination with booster, if eligible, is recommended for attending this event. Masks also recommended for duration of event. Requirements are subject to change. COVID Warning: An inherent risk of exposure to COVID-19 exists in any place where people gather. You assume all risks, hazards, and dangers arising from or relating in any way to the risk of contracting COVID-19 or any other communicable disease or illness, whether occurring before, during, or after the event, however caused or contracted, and voluntarily waive all claims and potential claims against the Event Organizers, and their affiliated companies relating to such risks. You expressly agree to comply with all laws and the rules of the Event Organizers when attending the event.",
+        "start_time": "2023-10-29 20:00:00",
+        "end_time": "2023-10-30 00:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://citysparkstorage.blob.core.windows.net/portalimages/portalimages/0ce178d2-7dd4-4999-b111-76aef5d5bfdd.large.png",
+        "ticket_links": [
+          {
+            "source": "\n\u0007AXS.com",
+            "link": "https://www.axs.com/events/491331/kim-petras-tickets"
+          },
+          {
+            "source": "Bill Graham Civic Auditorium",
+            "link": "https://www.sanfranciscoauditorium.com/events/kim-petras/"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "Bill Graham Civic Auditorium",
+            "link": "https://billgrahamcivic.com/events/kim-petras-231029"
+          },
+          {
+            "source": "Hot 101.7",
+            "link": "https://www.hot1017.com/2023/10/02/win-kim-petras-tickets-through-short-attention-span-theater-all-week-long/"
+          },
+          {
+            "source": "KRON4",
+            "link": "https://www.kron4.com/community/calendar/?_escaped_fragment_=/show/?ser=Apcera#!/details/Kim-Petras-Feed-The-Beast-World-Tour/12165939/2023-10-29T20"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/10/29/kim-petras-tickets"
+          },
+          {
+            "source": "Undercover Tourist",
+            "link": "https://www.undercovertourist.com/san-francisco/bill-graham-civic-auditorium/kim-petras-tickets/2330960/"
+          }
+        ],
+        "venue": {
+          "google_id": "0x8085809be90f0637:0xd558ef250f4addf9",
+          "name": "Bill Graham Civic Auditorium",
+          "phone_number": "+14156248900",
+          "website": "http://www.billgrahamcivic.com/",
+          "review_count": 3261,
+          "rating": 4.5,
+          "subtype": "live_music_venue",
+          "subtypes": [
+            "live_music_venue",
+            "art",
+            "auditorium",
+            "business_related",
+            "business_service",
+            "concert_hall",
+            "conference_center",
+            "convention_center",
+            "culture",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "hall",
+            "meeting_and_conference_facilities",
+            "music",
+            "nightlife",
+            "performing_arts",
+            "places_of_interest",
+            "public_api_establishment",
+            "rental",
+            "services",
+            "stage"
+          ],
+          "full_address": "99 Grove Street, San Francisco, CA 94102, United States",
+          "latitude": 37.778145,
+          "longitude": -122.41734,
+          "street_number": "99",
+          "street": "Grove Street",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/m/0bp9hl"
+        },
+        "tags": [
+          "concert",
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11vcxcp1d2",
+        "name": "Sexyy Red - Hood Hottest Princess Tour",
+        "link": "https://dothebay.com/events/2023/11/29/sexyy-red-hood-hottest-princess-tour-tickets",
+        "description": "Be there live to see Sexyy Red perform at Fillmore San Francisco in San Francisco on Wednesday, November 29, 2023.",
+        "start_time": "2023-11-29 20:00:00",
+        "end_time": "2023-11-30 00:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://s1.ticketm.net/dam/a/8ce/d35a6c5f-2070-497d-985d-e107b4e288ce_CUSTOM.jpg",
+        "ticket_links": [
+          {
+            "source": "\n\u0007AXS.com",
+            "link": "https://www.axs.com/events/500926/sexyy-red-tickets"
+          },
+          {
+            "source": "Event Tickets Center",
+            "link": "https://www.eventticketscenter.com/sexyy-red-san-francisco-11-29-2023/5900770/t"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/11/29/sexyy-red-hood-hottest-princess-tour-tickets"
+          },
+          {
+            "source": "Undercover Tourist",
+            "link": "https://www.undercovertourist.com/san-francisco/the-fillmore-san-francisco/sexyy-red-tickets/2386529/"
+          },
+          {
+            "source": "San Francisco Theater",
+            "link": "https://www.san-francisco-theater.com/theaters/the-fillmore/tickets.php?eventName=Sexyy+Red&cmsEventId=&month=11&year=2023"
+          },
+          {
+            "source": "AARP Local",
+            "link": "https://local.aarp.org/event/sexyy-red-hood-hottest-princess-tour-2023-11-29-tm-san-francisco-ca.html"
+          },
+          {
+            "source": "Live Nation",
+            "link": "https://www.livenation.com/event/G5vYZ9sQNnSeS/sexyy-red-hood-hottest-princess-tour"
+          }
+        ],
+        "venue": {
+          "google_id": "0x808580b9b206613b:0x44d95eb9bc33774",
+          "name": "The Fillmore",
+          "phone_number": "+14153463000",
+          "website": "https://www.livenation.com/venue/KovZpZAE6eeA/the-fillmore-events",
+          "review_count": 2445,
+          "rating": 4.7,
+          "subtype": "live_music_venue",
+          "subtypes": [
+            "live_music_venue",
+            "art",
+            "auditorium",
+            "banquet_hall",
+            "business_related",
+            "business_service",
+            "ceremonial_occasions",
+            "company",
+            "concert_hall",
+            "culture",
+            "dancing",
+            "discos_and_night_clubs",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_planner",
+            "event_ticket_seller",
+            "event_venue",
+            "feature",
+            "hall",
+            "music",
+            "night_club",
+            "nightlife",
+            "performing_arts",
+            "performing_arts_theater",
+            "personal_services",
+            "professional_services",
+            "public_api_establishment",
+            "services",
+            "shopping",
+            "stage",
+            "store",
+            "wedding_service",
+            "wedding_venue",
+            "weddings"
+          ],
+          "full_address": "1805 Geary Boulevard, San Francisco, CA 94115, United States",
+          "latitude": 37.783924,
+          "longitude": -122.433075,
+          "street_number": "1805",
+          "street": "Geary Boulevard",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/m/0259fy"
+        },
+        "tags": [
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11ss6yhb4t",
+        "name": "Queen + Adam Lambert - The Rhapsody Tour",
+        "link": "https://chasecenter.com/events/queen-adam-lambert-20231109",
+        "description": "The collaboration between the legendary British rock band Queen and American vocalist Adam Lambert is known as Queen + Adam Lambert. The collaboration was formed when Queen’s active members Brian May and Roger Taylor appeared on American Idol in 2009, where Lambert was a contestant.\nAfter their initial meeting, the trio performed together for the first time at the MTV Europe Awards in November 2011, receiving a positive response from fans and critics alike. The following year, Queen + Adam Lambert embarked on their first tour, performing across Europe and the UK. Since then, the collaboration has continued to tour the world, bringing Queen’s iconic catalog of hits to audiences around the globe while also paying tribute to the late Freddie Mercury.\nIn 2019, Queen + Adam Lambert first announced the Rhapsody Tour. The concert tour was met with critical acclaim, with many praising Lambert’s ability to channel Mercury’s charisma and stage presence while still making the songs his own.",
+        "start_time": "2023-11-08 20:00:00",
+        "end_time": "2023-11-09 00:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://citysparkstorage.blob.core.windows.net/portalimages/portalimages/Z91SHEDM_E6y7B1h0L4Tnw.large.png",
+        "ticket_links": [
+          {
+            "source": "AXS.com",
+            "link": "https://www.axs.com/events/479445/queen-and-adam-lambert-tickets"
+          },
+          {
+            "source": "NIGHTOUT",
+            "link": "https://nightout.com/events/a/queen-and-adam-lambert-parking-chase-center-parking-san-francisco-wed-nov-08-2023"
+          },
+          {
+            "source": "Advantage Tickets",
+            "link": "https://www.advantagetixx.com/events/2275854/queen-adam-lambert-tickets"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "Chase Center",
+            "link": "https://chasecenter.com/events/queen-adam-lambert-20231109"
+          },
+          {
+            "source": "KRON4",
+            "link": "https://www.kron4.com/community/calendar/?_escaped_fragment_=/show/?start=2022-03-24#!/details/Queen-Adam-Lambert-The-Rhapsody-Tour/11786176/2023-11-08T20"
+          },
+          {
+            "source": "98.5 KFOX",
+            "link": "https://kfox.com/contest/win-tickets-queen-adam-lambert/"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/11/8/queen-adam-lambert-the-rhapsody-tour-tickets"
+          },
+          {
+            "source": "Undercover Tourist",
+            "link": "https://www.undercovertourist.com/san-francisco/chase-center/queen-with-adam-lambert-tickets/2275854/"
+          }
+        ],
+        "venue": {
+          "google_id": "0x808f7fc67f4400e9:0x7d6793e3d8a141e3",
+          "name": "Chase Center",
+          "phone_number": "+18884794667",
+          "website": "https://www.chasecenter.com/",
+          "review_count": 6893,
+          "rating": 4.7,
+          "subtype": "arena",
+          "subtypes": [
+            "arena",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "places_of_interest",
+            "public_api_establishment",
+            "recreation",
+            "sports",
+            "sports_activity_location",
+            "sports_complex",
+            "stadium"
+          ],
+          "full_address": "1 Warriors Way, San Francisco, CA 94158, United States",
+          "latitude": 37.768017,
+          "longitude": -122.38788,
+          "street_number": "1",
+          "street": "Warriors Way",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/m/0wdtdnc"
+        },
+        "tags": [
+          "concert",
+          "music",
+          "rock",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11vb1b9t7c",
+        "name": "Xikers",
+        "link": "https://www.kron4.com/community/calendar/?_escaped_fragment_=%2Fshow%2F%3Fstart#!/details/2023-xikers-WORLD-TOUR-TRICKY-HOUSE-FIRST-ENCOUNTER-IN-USA/12441768/2023-11-04T19",
+        "description": "ALL SALES FINAL. NO REFUNDS/EXCHANGES. COVID-19 WARNING: An inherent risk of exposure to COVID-19 exists in any place where people gather. COVID-19 is an extremely contagious disease that can lead to severe illness and death. You assume all risks, hazards, and dangers arising from or relating in any way to the risk of contracting a communicable disease or illness—including, without limitation, exposure to COVID-19 or any other bacteria, virus, or other pathogen capable of causing a communicable disease or illness, whether that exposure occurs before, during, or after the event, and regardless of how caused or contracted—and you hereby waive any and all claims and potential claims against Sean Healy Presents, Ticketweb, The Concert Venue, and any additional Event Organizer(s) —and against any companies affiliated with Sean Healy Presents, Ticketweb, The Concert Venue, and any additional Event Organizer(s) —relating to such risks, hazards, and dangers.",
+        "start_time": "2023-11-04 19:00:00",
+        "end_time": "2023-11-04 21:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://citysparkstorage.blob.core.windows.net/portalimages/portalimages/304f74b9-4a91-4bb5-a4f7-7c385cb4436b.large.png",
+        "ticket_links": [
+          {
+            "source": "\n\u0007AXS.com",
+            "link": "https://www.axs.com/events/500112/xikers-tickets"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "KRON4",
+            "link": "https://www.kron4.com/community/calendar/?_escaped_fragment_=%2Fshow%2F%3Fstart#!/details/2023-xikers-WORLD-TOUR-TRICKY-HOUSE-FIRST-ENCOUNTER-IN-USA/12441768/2023-11-04T19"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/11/4/xikers-tickets"
+          },
+          {
+            "source": "Undercover Tourist",
+            "link": "https://www.undercovertourist.com/san-francisco/the-warfield/xikers-tickets/2400384/"
+          },
+          {
+            "source": "San Francisco Theater",
+            "link": "https://www.san-francisco-theater.com/theaters/the-warfield/tickets.php?eventName=Xikers&cmsEventId=&month=11&year=2023"
+          },
+          {
+            "source": "AARP Local",
+            "link": "https://local.aarp.org/event/2023-xikers-world-tour-tricky-house-first-encounter-in-usa-2023-11-04-tm-san-francisco-ca.html"
+          }
+        ],
+        "venue": {
+          "google_id": "0x80858085a9d7abdb:0x70d2c0624acc91fa",
+          "name": "The Warfield",
+          "phone_number": "+14153450900",
+          "website": "http://www.thewarfieldtheatre.com/",
+          "review_count": 3088,
+          "rating": 4.5,
+          "subtype": "concert_hall",
+          "subtypes": [
+            "concert_hall",
+            "art",
+            "auditorium",
+            "culture",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "hall",
+            "live_music_venue",
+            "music",
+            "nightlife",
+            "performing_arts",
+            "public_api_establishment"
+          ],
+          "full_address": "982 Market Street, San Francisco, CA 94102, United States",
+          "latitude": 37.782673,
+          "longitude": -122.41043,
+          "street_number": "982",
+          "street": "Market Street",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/m/02pp_7j"
+        },
+        "tags": [
+          "music",
+          "show"
+        ],
+        "language": "en"
+      },
+      {
+        "event_id": "/g/11sd_sk6bv",
+        "name": "Fresh Start Saturday",
+        "link": "https://open.spotify.com/concert/2kHwaci1Y7JwlX7qhqz3kG",
+        "description": "Fresh Start | Sat • Dec 30 • 1:00 PM | The Midway, San Francisco, CA",
+        "start_time": "2023-12-30 13:00:00",
+        "end_time": "2024-01-01 22:00:00",
+        "is_virtual": false,
+        "thumbnail": "https://images.ra.co/08eb900929ba7e2bb653148f04ce401e3e5cf821.jpg",
+        "ticket_links": [
+          {
+            "source": "Songkick",
+            "link": "https://www.songkick.com/festivals/597789-fresh-start/id/41347285-fresh-start-2023"
+          },
+          {
+            "source": "Ticketmaster",
+            "link": "https://www.ticketmaster.com/fresh-start-san-francisco-12-30-2023/event/Z7r9jZ1AdJ41p"
+          },
+          {
+            "source": "Tixr",
+            "link": "https://www.tixr.com/groups/midwaysf/events/fresh-start-new-years-block-party-2024-77999"
+          }
+        ],
+        "info_links": [
+          {
+            "source": "Spotify",
+            "link": "https://open.spotify.com/concert/2kHwaci1Y7JwlX7qhqz3kG"
+          },
+          {
+            "source": "DoTheBay",
+            "link": "https://dothebay.com/events/2023/12/30/fresh-start-2024-w-kaskade-louis-the-child-tchami-malaa-more-tickets"
+          },
+          {
+            "source": "Resident Advisor",
+            "link": "https://ra.co/events/1756890"
+          },
+          {
+            "source": "Fifty Grande",
+            "link": "https://www.fiftygrande.com/festivals/fresh-start-2023/"
+          },
+          {
+            "source": "San Francisco Theater",
+            "link": "https://www.san-francisco-theater.com/theaters/the-midway/tickets.php?eventName=Fresh+Start+New+Years+Block+Party+-+Weekend+Pass+%2812%2F30+-+1%2F1%29+%2821%2B+Event%29+%28Tchami%2C+Louis+The+Child%2C+Kaskade%29&cmsEventId=&month=12&year=2023"
+          }
+        ],
+        "venue": {
+          "google_id": "0x808f7fa422ff76d1:0x2130d37e05bc1ca0",
+          "name": "The Midway",
+          "phone_number": "+14153014355",
+          "website": "http://themidwaysf.com/",
+          "review_count": 1659,
+          "rating": 4.5,
+          "subtype": "live_music_venue",
+          "subtypes": [
+            "live_music_venue",
+            "art",
+            "art_gallery",
+            "culture",
+            "dancing",
+            "discos_and_night_clubs",
+            "eatery",
+            "education_and_culture",
+            "entertainment",
+            "entertainment_and_recreation",
+            "establishment",
+            "establishment_poi",
+            "event_venue",
+            "feature",
+            "food",
+            "food_and_drink",
+            "music",
+            "night_club",
+            "nightlife",
+            "performing_arts",
+            "public_api_establishment",
+            "restaurant",
+            "restaurant_or_cafe"
+          ],
+          "full_address": "900 Marin Street, San Francisco, CA 94124, United States",
+          "latitude": 37.74928,
+          "longitude": -122.3857,
+          "street_number": "900",
+          "street": "Marin Street",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "US",
+          "timezone": "America/Los_Angeles",
+          "google_mid": "/g/11byvk27gd"
+        },
+        "tags": [
+          "music",
+          "show"
+        ],
+        "language": "en"
+      }
+    ]
+  }
