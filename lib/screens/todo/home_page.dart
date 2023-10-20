@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:apple_todo/screens/concert/concert.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
@@ -115,7 +116,9 @@ class _HomePageState extends State<HomePage> {
             ? "Todos"
             : _selectedIndex == 1
                 ? "My Events"
-                : "Profile"),
+                : _selectedIndex == 2
+                    ? "Concert"
+                    : "Profile"),
         centerTitle: true,
         backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.blue,
         actions: [
@@ -474,6 +477,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const Calendar(),
+            const MyConcert(),
             const Profile()
           ],
         ),
@@ -492,15 +496,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
         unselectedItemColor: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
-            label: "Todos",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Todos"),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: "Calendar"),
+          BottomNavigationBarItem(icon: Icon(Icons.queue_music), label: "Concert"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
         onTap: (int index) {
