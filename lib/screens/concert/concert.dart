@@ -69,7 +69,7 @@ class _MyConcertState extends State<MyConcert> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, top: 15, bottom: 50),
+      padding: const EdgeInsets.only(left: 12, right: 12, top: 15),
       child: Column(
         children: [
           TextField(
