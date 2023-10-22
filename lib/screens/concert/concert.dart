@@ -26,7 +26,7 @@ class _MyConcertState extends State<MyConcert> {
     'Concert Hall',
     'Arena',
   ];
-  String selectedOption = 'no_filter';
+  String selectedOption = 'No Filter';
   String searchQuery = '';
 
   final _searchController = TextEditingController();
@@ -77,7 +77,7 @@ class _MyConcertState extends State<MyConcert> {
             onChanged: filterResults,
             decoration: InputDecoration(
               hintText: "Cari nama konser",
-              prefixIcon: const Icon(Icons.search),
+              prefixIcon: Icon(Icons.search, color: context.watch<TodoProvider>().isDark ? Colors.blue : Colors.grey[500]),
               hintStyle: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.blue : const Color(0xff1e1e1e)),
             ),
             style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.blue : const Color(0xff1e1e1e)),
@@ -110,35 +110,44 @@ class _MyConcertState extends State<MyConcert> {
                 }).toList()),
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: filteredList?.length == null ? 0 : filteredList?.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 15, bottom: 18),
-                        color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
-                        child: ListTile(
-                          onTap: () {
-                            MaterialPageRoute route = MaterialPageRoute(builder: (_) => ConcertDetail(concert: filteredList![index]));
-                            Navigator.push(context, route);
-                          },
-                          leading: CircleAvatar(backgroundImage: NetworkImage(filteredList![index].thumbnail)),
-                          title: Text(
-                            filteredList![index].name,
-                            style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                          ),
-                          subtitle: Text(
-                            'Subtype: ${filteredList![index].subtype} - Rating: ${filteredList![index].rating}',
-                            style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+            child: filteredList?.length != null && filteredList?.length != 0
+                ? ListView.builder(
+                    itemCount: filteredList?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            padding: const EdgeInsets.only(top: 15, bottom: 18),
+                            color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
+                            child: ListTile(
+                              onTap: () {
+                                MaterialPageRoute route = MaterialPageRoute(builder: (_) => ConcertDetail(concert: filteredList![index]));
+                                Navigator.push(context, route);
+                              },
+                              leading: CircleAvatar(backgroundImage: NetworkImage(filteredList![index].thumbnail)),
+                              title: Text(
+                                filteredList![index].name,
+                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                              ),
+                              subtitle: Text(
+                                'Subtype: ${filteredList![index].subtype} - Rating: ${filteredList![index].rating}',
+                                style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  );
-                }),
+                      );
+                    })
+                : Column(
+                    children: [
+                      Container(width: 200, margin: const EdgeInsets.only(bottom: 10), child: Image.asset('assets/no-concert.png')),
+                      Text('Tidak ada konser',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16, color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black))
+                    ],
+                  ),
           ),
         ],
       ),
