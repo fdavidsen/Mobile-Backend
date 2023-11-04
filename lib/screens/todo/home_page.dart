@@ -1,17 +1,19 @@
 import 'dart:async';
 
-import 'package:apple_todo/screens/concert/concert.dart';
+import 'package:apple_todo/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:apple_todo/screens/todo/add_todo.dart';
 import 'package:apple_todo/screens/calendar.dart';
-import 'package:apple_todo/screens/profile.dart';
+import 'package:apple_todo/screens/concert/concert.dart';
+import 'package:apple_todo/screens/profile/profile.dart';
 import 'package:apple_todo/models/database_manager.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/utilities/constants.dart';
 import 'package:apple_todo/widgets/drawer.dart';
+import 'package:apple_todo/cloud_functions/auth_firebase.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,8 +31,6 @@ class _HomePageState extends State<HomePage> {
   bool displayFinished = false;
   bool displayUnfinished = false;
 
-  int _selectedIndex = 0;
-
   List<Map<String, String>>? allFinishedTodoList;
   List<Map<String, String>>? routineFinishedTodoList;
   List<Map<String, String>>? workFinishedTodoList;
@@ -45,7 +45,10 @@ class _HomePageState extends State<HomePage> {
   final DBManager _dbManager = DBManager();
 
   late SharedPreferences prefs;
-  final PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 3);
+  int _selectedIndex = 3;
+
+  late AuthFirebase auth;
 
   Future<void> _getDarkMode() async {
     prefs = await SharedPreferences.getInstance();
@@ -54,6 +57,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    auth = AuthFirebase();
     _getDarkMode();
     super.initState();
   }
@@ -138,8 +142,21 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pop(context);
                         });
                   },
-                  icon: const Icon(Icons.delete_forever_outlined))
-              : Container()
+                  icon: const Icon(Icons.delete_forever_outlined),
+                  tooltip: 'Delete all task',
+                )
+              : Container(),
+          IconButton(
+            onPressed: () {
+              auth.logout();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const Login()),
+                (route) => false,
+              );
+            },
+            icon: const Icon(Icons.logout),
+            tooltip: 'Logout',
+          )
         ],
       ),
       body: Container(

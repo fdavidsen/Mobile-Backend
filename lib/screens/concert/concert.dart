@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:apple_todo/utilities/constants.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
+import 'package:apple_todo/providers/concert_provider.dart';
 import 'package:apple_todo/models/concert_model.dart';
 import 'package:apple_todo/screens/concert/concert_detail.dart';
 
@@ -17,9 +19,6 @@ class MyConcert extends StatefulWidget {
 }
 
 class _MyConcertState extends State<MyConcert> {
-  List? concertList;
-  List? filteredList;
-
   List<String> options = [
     'No Filter',
     'Live Music Venue',
@@ -44,20 +43,22 @@ class _MyConcertState extends State<MyConcert> {
 
   void filterResults(String query) {
     searchQuery = query;
-    List filterResults = concertList!
+    List filterResults = context
+        .read<ConcertProvider>()
+        .concertList
         .where((item) =>
             item.name.toLowerCase().contains(query.toLowerCase()) && (selectedOption != 'No Filter' ? item.subtype.contains(selectedOption) : true))
         .toList();
-    setState(() {
-      filteredList = filterResults;
-    });
+
+    context.read<ConcertProvider>().filteredList = filterResults;
   }
 
   Future<void> loadData() async {
-    concertList = await getConcertData();
-    setState(() {
-      filteredList = concertList;
-    });
+    if (mounted) {
+      try {
+        context.read<ConcertProvider>().concertList = await getConcertData();
+      } catch (error) {}
+    }
   }
 
   @override
@@ -110,9 +111,9 @@ class _MyConcertState extends State<MyConcert> {
                 }).toList()),
           ),
           Expanded(
-            child: filteredList?.length != null && filteredList?.length != 0
+            child: context.watch<ConcertProvider>().filteredList?.length != null && context.watch<ConcertProvider>().filteredList?.length != 0
                 ? ListView.builder(
-                    itemCount: filteredList?.length,
+                    itemCount: context.watch<ConcertProvider>().filteredList?.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 12),
@@ -123,16 +124,17 @@ class _MyConcertState extends State<MyConcert> {
                             color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
                             child: ListTile(
                               onTap: () {
-                                MaterialPageRoute route = MaterialPageRoute(builder: (_) => ConcertDetail(concert: filteredList![index]));
+                                MaterialPageRoute route =
+                                    MaterialPageRoute(builder: (_) => ConcertDetail(concert: context.watch<ConcertProvider>().filteredList![index]));
                                 Navigator.push(context, route);
                               },
-                              leading: CircleAvatar(backgroundImage: NetworkImage(filteredList![index].thumbnail)),
+                              leading: CircleAvatar(backgroundImage: NetworkImage(context.watch<ConcertProvider>().filteredList![index].thumbnail)),
                               title: Text(
-                                filteredList![index].name,
+                                context.watch<ConcertProvider>().filteredList![index].name,
                                 style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                               ),
                               subtitle: Text(
-                                'Subtype: ${filteredList![index].subtype} - Rating: ${filteredList![index].rating}',
+                                'Subtype: ${context.watch<ConcertProvider>().filteredList![index].subtype} - Rating: ${context.read<ConcertProvider>().filteredList![index].rating}',
                                 style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                               ),
                             ),

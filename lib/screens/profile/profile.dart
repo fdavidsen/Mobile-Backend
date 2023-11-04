@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
+import 'package:apple_todo/screens/profile/member.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -16,10 +17,9 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:
-          context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      color: context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 85),
         child: Column(
           children: [
             Card(
@@ -64,9 +64,7 @@ class _ProfileState extends State<Profile> {
                                   children: [
                                     Expanded(
                                       child: Container(
-                                          color: context.watch<TodoProvider>().isDark
-                                              ? const Color(0xff1e1e1e)
-                                              : Colors.white,
+                                          color: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.white,
                                           width: double.infinity,
                                           child: context.watch<TodoProvider>().getGambar == null
                                               ? const CircleAvatar(
@@ -81,8 +79,7 @@ class _ProfileState extends State<Profile> {
                                                   child: Container(
                                                     decoration: BoxDecoration(
                                                         image: DecorationImage(
-                                                      image:
-                                                          context.watch<TodoProvider>().getGambar!,
+                                                      image: context.watch<TodoProvider>().getGambar!,
                                                       fit: BoxFit.cover,
                                                     )),
                                                   ),
@@ -122,18 +119,14 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.all(4),
                     child: Text(
                       "Tim Apple",
-                      style: TextStyle(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                      style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.all(4),
                     child: Text(
                       "Task finished: ${context.watch<TodoProvider>().filteredItems("", true).length}",
-                      style: TextStyle(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                      style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                   ),
                 ),
@@ -157,20 +150,12 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Text(
                               categories[index],
-                              style: TextStyle(
-                                  color: context.watch<TodoProvider>().isDark
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 12),
+                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 12),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(2),
                               child: Text(
-                                context
-                                    .watch<TodoProvider>()
-                                    .filteredItems(categories[index], true)
-                                    .length
-                                    .toString(),
+                                context.watch<TodoProvider>().filteredItems(categories[index], true).length.toString(),
                                 style: TextStyle(
                                     color: categories[index] == "Routine"
                                         ? Colors.deepOrange
@@ -182,11 +167,7 @@ class _ProfileState extends State<Profile> {
                             ),
                             Text(
                               "Finished",
-                              style: TextStyle(
-                                  color: context.watch<TodoProvider>().isDark
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 12),
+                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 12),
                             ),
                           ],
                         ),
@@ -207,8 +188,7 @@ class _ProfileState extends State<Profile> {
                           disabledActiveTrackColor: Colors.blue,
                           disabledInactiveTrackColor: Colors.grey),
                       child: Slider(
-                        value:
-                            context.watch<TodoProvider>().filteredItems("", true).length.toDouble(),
+                        value: context.watch<TodoProvider>().filteredItems("", true).length.toDouble(),
                         max: (context.watch<TodoProvider>().filteredItems("", false).length +
                                 context.watch<TodoProvider>().filteredItems("", true).length)
                             .toDouble(),
@@ -220,13 +200,15 @@ class _ProfileState extends State<Profile> {
                       context.watch<TodoProvider>().filteredItems("", false).length.toInt() != 0
                           ? "You still have ${context.watch<TodoProvider>().filteredItems("", false).length.toInt()} task(s) to do"
                           : "All tasks done",
-                      style: TextStyle(
-                          color:
-                              context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                      style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                   ],
                 ),
               ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 15),
+              child: Member(),
             )
           ],
         ),

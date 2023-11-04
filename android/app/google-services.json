@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "540453340058",
+    "project_id": "apple-todo-de487",
+    "storage_bucket": "apple-todo-de487.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540453340058:android:855eed21b0a708fb9fb023",
+        "android_client_info": {
+          "package_name": "com.example.apple_todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD6g5e1BlRBBEGE9isjTgoBjbxgRzDipg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
