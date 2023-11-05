@@ -16,18 +16,21 @@ class _MemberState extends State<Member> {
     {
       'name': 'Frederic Davidsen',
       'nim': '211110462',
+      'avatar': 'frederic-avatar.jpeg',
       'picture': 'frederic.jpeg',
       'quote': '"The computer was born to solve problems that did not exist before." - Bill Gates'
     },
     {
       'name': 'Novita Adelin Br Lumbantobing',
       'nim': '211111810',
+      'avatar': 'novita-avatar.jpeg',
       'picture': 'novita.jpeg',
       'quote': '"Technology empowers people to do what they want to do. It lets people be creative." - Steve Jobs'
     },
     {
       'name': 'Mila Rachma Fika Limbong',
       'nim': '211111750',
+      'avatar': 'mila-avatar.jpeg',
       'picture': 'mila.jpeg',
       'quote':
           '"The good news about computers is that they do what you tell them to do. The bad news is that they do what you tell them to do." - Ted Nelson'
@@ -62,12 +65,11 @@ class _MemberState extends State<Member> {
                 itemCount: _members.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: CircleAvatar(backgroundImage: AssetImage('assets/about/${_members[index]['picture']}')),
+                    leading: CircleAvatar(backgroundImage: AssetImage('assets/about/${_members[index]['avatar']}')),
                     title: Text(_members[index]['name'], style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black)),
                     trailing: Icon(Icons.more_horiz, color: context.watch<TodoProvider>().isDark ? Colors.grey : Colors.black),
                     onTap: () {
-                      _analytics.testEventLog('visit_');
-                      // _analytics.testEventLog('visit_${_members[index]['name'].split(' ')[0]}');
+                      _analytics.testEventLog('visit_${_members[index]['name'].split(' ')[0]}');
 
                       Navigator.push(
                           context,

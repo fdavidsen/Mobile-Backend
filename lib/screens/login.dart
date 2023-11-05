@@ -18,14 +18,13 @@ class _LoginState extends State<Login> {
   void initState() {
     auth = AuthFirebase();
     auth.getCurrentUser().then((value) {
-      print(value);
       if (value != null) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
         );
       }
-    }).catchError((err) => print(err));
+    }).catchError((e) => print(e));
     super.initState();
   }
 
@@ -41,20 +40,16 @@ class _LoginState extends State<Login> {
             return "Password must be 6 characters";
           }
         }
+        return null;
       },
-      loginProviders: [LoginProvider(callback: _onLoginGoogle, icon: FontAwesomeIcons.google, label: 'Google')],
-      onSubmitAnimationCompleted: () {
-        auth.getCurrentUser().then((value) {
-          print(value);
-          // MaterialPageRoute route;
-          // if (value != null) {
-          //   route = MaterialPageRoute(builder: (context) => MyHome(wid: value.uid));
-          // } else {
-          //   route = MaterialPageRoute(builder: (context) => Home7());
-          // }
-          // Navigator.pushReplacement(context, route);
-        }).catchError((err) => print(err));
-      },
+      loginProviders: [
+        LoginProvider(
+          callback: _loginWithGoogle,
+          icon: FontAwesomeIcons.google,
+          label: 'Google',
+        )
+      ],
+      onSubmitAnimationCompleted: () {},
     );
   }
 
@@ -62,10 +57,15 @@ class _LoginState extends State<Login> {
     return auth.signupWithEmail(data.name!, data.password!).then((value) {
       if (value != null) {
         final snackBar = SnackBar(
-          content: const Text('Sign Up Successful'),
+          content: const Text('Signup berhasil'),
           action: SnackBarAction(label: 'OK', onPressed: () {}),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
       }
     });
   }
@@ -79,7 +79,29 @@ class _LoginState extends State<Login> {
         );
       } else {
         final snackBar = SnackBar(
-          content: const Text('Login Failed, User Not Found'),
+          content: const Text('Login gagal, email atau password salah'),
+          action: SnackBarAction(label: 'OK', onPressed: () {}),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Login()),
+        );
+      }
+    });
+  }
+
+  Future<String?> _loginWithGoogle() {
+    return auth.loginWithGoogle().then((value) {
+      if (value != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } else {
+        final snackBar = SnackBar(
+          content: const Text('Login dengan akun Google gagal'),
           action: SnackBarAction(label: 'OK', onPressed: () {}),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -94,10 +116,5 @@ class _LoginState extends State<Login> {
 
   Future<String>? _recoverPassword(String name) {
     return null;
-  }
-
-  Future<String?>? _onLoginGoogle() {
-    // return null;
-    return auth.googleLogin();
   }
 }

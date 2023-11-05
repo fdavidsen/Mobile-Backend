@@ -57,7 +57,7 @@ class _MyConcertState extends State<MyConcert> {
     if (mounted) {
       try {
         context.read<ConcertProvider>().concertList = await getConcertData();
-      } catch (error) {}
+      } catch (e) {}
     }
   }
 
