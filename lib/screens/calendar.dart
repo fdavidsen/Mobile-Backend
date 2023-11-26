@@ -7,8 +7,8 @@ import 'package:quickalert/quickalert.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/models/event_time_model.dart';
-import 'package:apple_todo/models/database_manager.dart';
 import 'package:apple_todo/utilities/constants.dart';
+import 'package:apple_todo/cloud_functions/firestore_database.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({Key? key}) : super(key: key);
@@ -18,26 +18,25 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  bool _dbIsLoaded = false;
-  final DBManager _dbManager = DBManager();
+  final FSDatabase _fsDatabase = FSDatabase();
 
   TextEditingController judulController = TextEditingController();
   TextEditingController additionalController = TextEditingController();
   TextEditingController tglMulaiController = TextEditingController();
   TextEditingController tglSelesaiController = TextEditingController();
 
+  Future<void> loadData() async {
+    context.read<TodoProvider>().setAllEvent = await _fsDatabase.getAllEvent();
+  }
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (!_dbIsLoaded) {
-      Timer.periodic(const Duration(milliseconds: 100), (timer) async {
-        if (_dbManager.db != null) {
-          context.read<TodoProvider>().setAllEvent = await _dbManager.getAllEvent();
-          _dbIsLoaded = true;
-          timer.cancel();
-        }
-      });
-    }
-
     return SingleChildScrollView(
       padding: const EdgeInsets.only(right: 8, left: 8, bottom: 30),
       child: Column(
@@ -254,8 +253,11 @@ class _CalendarState extends State<Calendar> {
                                         tglMulaiController.text = '';
                                         tglSelesaiController.text = '';
 
-                                        int id = await _dbManager.insertEvent(data);
-                                        data.id = id.toString();
+                                        // Insert to local database via sqflite
+                                        // int id = await _dbManager.insertEvent(data);
+                                        // data.id = id.toString();
+
+                                        data = await _fsDatabase.insertEvent(data);
 
                                         setState(() {
                                           context.read<TodoProvider>().isiEvent = data;
@@ -282,7 +284,7 @@ class _CalendarState extends State<Calendar> {
                               cancelBtnText: 'Tutup',
                               showCancelBtn: true,
                               onConfirmBtnTap: () {
-                                _dbManager.deleteAllEvent();
+                                _fsDatabase.deleteAllEvent();
                                 context.read<TodoProvider>().deleteAllEvent();
                                 Navigator.pop(context);
                               });
@@ -301,58 +303,74 @@ class _CalendarState extends State<Calendar> {
                   shrinkWrap: true,
                   itemCount: context.watch<TodoProvider>().events().length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          padding: const EdgeInsets.only(top: 15, bottom: 18, left: 12),
-                          color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
-                          child: ListTile(
-                            title: Text(
-                              context.watch<TodoProvider>().events()[index].title,
-                              style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  context.watch<TodoProvider>().events()[index].subtitle,
-                                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
+                    EventTime event = context.read<TodoProvider>().events()[index];
+
+                    return GestureDetector(
+                      onTap: () {
+                        _fsDatabase.toggleEventPassStatus(event);
+                        setState(() {
+                          event.isPassed = !event.isPassed;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                padding: const EdgeInsets.only(top: 15, bottom: 18, left: 12),
+                                color: context.watch<TodoProvider>().isDark ? const Color(0xff0e0e0e) : Colors.white,
+                                child: ListTile(
+                                  title: Text(
+                                    event.title,
+                                    style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        event.subtitle,
+                                        style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
+                                      ),
+                                      Text(
+                                        event.startDate == event.endDate ? event.endDate : "${event.startDate} - ${event.endDate}",
+                                        style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
+                                      ),
+                                    ],
+                                  ),
+                                  trailing: IconButton(
+                                    icon: const Icon(
+                                      Icons.remove_circle_outline,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      QuickAlert.show(
+                                          context: context,
+                                          type: QuickAlertType.warning,
+                                          title: 'Hapus event ini?',
+                                          confirmBtnText: 'Hapus',
+                                          cancelBtnText: 'Tutup',
+                                          showCancelBtn: true,
+                                          onConfirmBtnTap: () {
+                                            _fsDatabase.deleteEvent(event.id);
+                                            setState(() {
+                                              context.read<TodoProvider>().hapusEvent = event;
+                                            });
+                                            Navigator.pop(context);
+                                          });
+                                    },
+                                  ),
                                 ),
-                                Text(
-                                  context.watch<TodoProvider>().events()[index].startDate == context.watch<TodoProvider>().events()[index].endDate
-                                      ? context.watch<TodoProvider>().events()[index].endDate
-                                      : "${context.watch<TodoProvider>().events()[index].startDate} - ${context.watch<TodoProvider>().events()[index].endDate}",
-                                  style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white54 : Colors.black54),
-                                ),
-                              ],
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(
-                                Icons.remove_circle_outline,
-                                color: Colors.red,
                               ),
-                              onPressed: () {
-                                QuickAlert.show(
-                                    context: context,
-                                    type: QuickAlertType.warning,
-                                    title: 'Hapus event ini?',
-                                    confirmBtnText: 'Hapus',
-                                    cancelBtnText: 'Tutup',
-                                    showCancelBtn: true,
-                                    onConfirmBtnTap: () {
-                                      EventTime event = context.read<TodoProvider>().events()[index];
-                                      _dbManager.deleteEvent(event.id);
-                                      setState(() {
-                                        context.read<TodoProvider>().hapusEvent = event;
-                                      });
-                                      Navigator.pop(context);
-                                    });
-                              },
                             ),
-                            // isThreeLine: true,
-                          ),
+                            event.isPassed
+                                ? Image.asset(
+                                    'assets/passed.png',
+                                    height: 75,
+                                  )
+                                : Container()
+                          ],
                         ),
                       ),
                     );

@@ -51,6 +51,7 @@ dependencies:
   firebase_auth: ^4.12.1
   font_awesome_flutter: ^10.6.0
   google_sign_in: ^6.1.5
+  cloud_firestore: ^4.13.2
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,7 @@ flutter:
     - assets/no-task.png
     - assets/no-event.png
     - assets/no-concert.png
+    - assets/passed.png
     - assets/about/frederic.jpeg
     - assets/about/novita.jpeg
     - assets/about/mila.jpeg
