@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
+import 'package:apple_todo/screens/profile/weather.dart';
 import 'package:apple_todo/screens/profile/member.dart';
 
 class Profile extends StatefulWidget {
@@ -207,9 +208,10 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(top: 15),
-              child: Member(),
-            )
+              padding: EdgeInsets.only(top: 30, bottom: 30),
+              child: Weather(),
+            ),
+            const Member(),
           ],
         ),
       ),
