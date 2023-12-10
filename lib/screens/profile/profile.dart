@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:localization/localization.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/screens/profile/weather.dart';
 import 'package:apple_todo/screens/profile/member.dart';
@@ -150,7 +151,7 @@ class _ProfileState extends State<Profile> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              categories[index],
+                              categories[index].i18n(),
                               style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 12),
                             ),
                             Padding(

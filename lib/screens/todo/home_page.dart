@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:apple_todo/providers/locale_provider.dart';
 import 'package:apple_todo/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,9 +51,21 @@ class _HomePageState extends State<HomePage> {
 
   late AuthFirebase auth;
 
+  Locale selectedValue = const Locale('en', 'US');
+
   Future<void> _getDarkMode() async {
     prefs = await SharedPreferences.getInstance();
     context.read<TodoProvider>().setDark = prefs.getBool(sharedPreferencesKeyDarkMode) ?? false;
+  }
+
+  Locale getLanguage() => selectedValue;
+
+  void changeLanguage() {
+    print(12334);
+    setState(() {
+      context.read<LocaleProvider>().set(Locale('id', 'ID'));
+      selectedValue = const Locale('id', 'ID');
+    });
   }
 
   @override
@@ -541,6 +554,8 @@ class _HomePageState extends State<HomePage> {
         workFinishedTodoList: workFinishedTodoList!,
         othersUnfinishedTodoList: othersUnfinishedTodoList!,
         othersFinishedTodoList: othersFinishedTodoList!,
+        getLanguage: getLanguage,
+        changeLanguage: changeLanguage,
       ),
     );
   }

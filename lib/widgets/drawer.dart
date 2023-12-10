@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:apple_todo/widgets/language_dropdown.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/utilities/constants.dart';
 
@@ -14,6 +16,9 @@ class MyDrawer extends StatefulWidget {
   final List<Map<String, String>> othersUnfinishedTodoList;
   final List<Map<String, String>> othersFinishedTodoList;
 
+  final Function getLanguage;
+  final Function changeLanguage;
+
   const MyDrawer({
     super.key,
     required this.routineUnfinishedTodoList,
@@ -22,6 +27,8 @@ class MyDrawer extends StatefulWidget {
     required this.workFinishedTodoList,
     required this.othersUnfinishedTodoList,
     required this.othersFinishedTodoList,
+    required this.getLanguage,
+    required this.changeLanguage,
   });
 
   @override
@@ -92,7 +99,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
               title: Text(
-                "Personal",
+                "Personal".i18n(),
                 style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
               ),
               trailing: Visibility(
@@ -109,7 +116,7 @@ class _MyDrawerState extends State<MyDrawer> {
               )),
           ListTile(
               title: Text(
-                "Work",
+                "Work".i18n(),
                 style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
               ),
               trailing: Visibility(
@@ -126,7 +133,7 @@ class _MyDrawerState extends State<MyDrawer> {
               )),
           ListTile(
               title: Text(
-                "Others",
+                "Others".i18n(),
                 style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
               ),
               trailing: Visibility(
@@ -146,6 +153,7 @@ class _MyDrawerState extends State<MyDrawer> {
             endIndent: 12,
             color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
           ),
+          LanguageDropdown(getLanguage: widget.getLanguage, changeLanguage: widget.changeLanguage),
           ListTile(
             title: Text(
               "Dark Mode",
@@ -161,7 +169,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 });
               },
             ),
-          )
+          ),
         ],
       ),
     );
