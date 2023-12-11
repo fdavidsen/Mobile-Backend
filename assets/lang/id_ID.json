@@ -1,0 +1,17 @@
+{
+    "Routine": "Rutinitas",
+    "Work": "Pekerjaan",
+    "Others" : "Lainnya",
+    "finished" : "Selesai",
+    "all_tasks_done" : "Semua task sudah selesai",
+    "profile_team_apple" : "Tim Apple",
+    "profile_task_finished" : "Task yang selesai: %s",
+    "profile_our_members" : "Tim Kami",
+    "drawer_by_team_apple" : "oleh Tim Apple",
+    "setting_dark_mode" : "Mode gelap",
+    "setting_button_change_language" : "Ubah bahasa sekarang",
+    "nav_todo": "Todo",
+    "nav_calendar": "Kalendar",
+    "nav_concert": "Konser",
+    "nav_profile": "Profil"
+}

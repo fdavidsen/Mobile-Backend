@@ -120,14 +120,14 @@ class _ProfileState extends State<Profile> {
                   title: Padding(
                     padding: const EdgeInsets.all(4),
                     child: Text(
-                      "Tim Apple",
+                      "profile_team_apple".i18n(),
                       style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.all(4),
                     child: Text(
-                      "Task finished: ${context.watch<TodoProvider>().filteredItems("", true).length}",
+                      "profile_task_finished".i18n([context.watch<TodoProvider>().filteredItems("", true).length.toString()]),
                       style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                   ),
@@ -168,7 +168,7 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
                             Text(
-                              "Finished",
+                              "finished".i18n(),
                               style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 12),
                             ),
                           ],
@@ -201,7 +201,7 @@ class _ProfileState extends State<Profile> {
                     Text(
                       context.watch<TodoProvider>().filteredItems("", false).length.toInt() != 0
                           ? "You still have ${context.watch<TodoProvider>().filteredItems("", false).length.toInt()} task(s) to do"
-                          : "All tasks done",
+                          : "all_tasks_done".i18n(),
                       style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
                     ),
                   ],

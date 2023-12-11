@@ -1,20 +1,20 @@
 import 'dart:async';
 
-import 'package:apple_todo/providers/locale_provider.dart';
-import 'package:apple_todo/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:apple_todo/screens/login.dart';
 import 'package:apple_todo/screens/todo/add_todo.dart';
 import 'package:apple_todo/screens/calendar.dart';
 import 'package:apple_todo/screens/concert/concert.dart';
 import 'package:apple_todo/screens/profile/profile.dart';
 import 'package:apple_todo/models/database_manager.dart';
+import 'package:apple_todo/cloud_functions/auth_firebase.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/utilities/constants.dart';
 import 'package:apple_todo/widgets/drawer.dart';
-import 'package:apple_todo/cloud_functions/auth_firebase.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,21 +51,9 @@ class _HomePageState extends State<HomePage> {
 
   late AuthFirebase auth;
 
-  Locale selectedValue = const Locale('en', 'US');
-
   Future<void> _getDarkMode() async {
     prefs = await SharedPreferences.getInstance();
     context.read<TodoProvider>().setDark = prefs.getBool(sharedPreferencesKeyDarkMode) ?? false;
-  }
-
-  Locale getLanguage() => selectedValue;
-
-  void changeLanguage() {
-    print(12334);
-    setState(() {
-      context.read<LocaleProvider>().set(Locale('id', 'ID'));
-      selectedValue = const Locale('id', 'ID');
-    });
   }
 
   @override
@@ -130,12 +118,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_selectedIndex == 0
-            ? "Todos"
+            ? "nav_todo".i18n()
             : _selectedIndex == 1
-                ? "My Events"
+                ? "nav_calendar".i18n()
                 : _selectedIndex == 2
-                    ? "Concert"
-                    : "Profile"),
+                    ? "nav_concert".i18n()
+                    : "nav_profile".i18n()),
         centerTitle: true,
         backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.blue,
         actions: [
@@ -530,11 +518,11 @@ class _HomePageState extends State<HomePage> {
         currentIndex: _selectedIndex,
         backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1a1a1a) : const Color(0xfff0f0f0),
         unselectedItemColor: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Todos"),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month_outlined), label: "Calendar"),
-          BottomNavigationBarItem(icon: Icon(Icons.queue_music), label: "Concert"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.list_alt), label: "nav_todo".i18n()),
+          BottomNavigationBarItem(icon: const Icon(Icons.calendar_month_outlined), label: "nav_calendar".i18n()),
+          BottomNavigationBarItem(icon: const Icon(Icons.queue_music), label: "nav_concert".i18n()),
+          BottomNavigationBarItem(icon: const Icon(Icons.person), label: "nav_profile".i18n()),
         ],
         onTap: (int index) {
           setState(() {
@@ -554,8 +542,6 @@ class _HomePageState extends State<HomePage> {
         workFinishedTodoList: workFinishedTodoList!,
         othersUnfinishedTodoList: othersUnfinishedTodoList!,
         othersFinishedTodoList: othersFinishedTodoList!,
-        getLanguage: getLanguage,
-        changeLanguage: changeLanguage,
       ),
     );
   }

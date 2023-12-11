@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/screens/profile/member_detail.dart';
@@ -47,7 +48,7 @@ class _MemberState extends State<Member> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20, bottom: 10),
-            child: Text('Our Members',
+            child: Text('profile_our_members'.i18n(),
                 style: TextStyle(
                   fontSize: 18,
                   color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,

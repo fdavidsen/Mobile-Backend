@@ -16,9 +16,6 @@ class MyDrawer extends StatefulWidget {
   final List<Map<String, String>> othersUnfinishedTodoList;
   final List<Map<String, String>> othersFinishedTodoList;
 
-  final Function getLanguage;
-  final Function changeLanguage;
-
   const MyDrawer({
     super.key,
     required this.routineUnfinishedTodoList,
@@ -27,8 +24,6 @@ class MyDrawer extends StatefulWidget {
     required this.workFinishedTodoList,
     required this.othersUnfinishedTodoList,
     required this.othersFinishedTodoList,
-    required this.getLanguage,
-    required this.changeLanguage,
   });
 
   @override
@@ -83,7 +78,7 @@ class _MyDrawerState extends State<MyDrawer> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Text(
-                  "by Tim Apple",
+                  "drawer_by_team_apple".i18n(),
                   style: TextStyle(
                     color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
                     fontSize: 15,
@@ -99,7 +94,7 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
               title: Text(
-                "Personal".i18n(),
+                "Routine".i18n(),
                 style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
               ),
               trailing: Visibility(
@@ -153,10 +148,9 @@ class _MyDrawerState extends State<MyDrawer> {
             endIndent: 12,
             color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
           ),
-          LanguageDropdown(getLanguage: widget.getLanguage, changeLanguage: widget.changeLanguage),
           ListTile(
             title: Text(
-              "Dark Mode",
+              "setting_dark_mode".i18n(),
               style: TextStyle(color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black),
             ),
             trailing: Switch(
@@ -170,6 +164,12 @@ class _MyDrawerState extends State<MyDrawer> {
               },
             ),
           ),
+          Divider(
+            indent: 12,
+            endIndent: 12,
+            color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
+          ),
+          const ListTile(title: LanguageDropdown()),
         ],
       ),
     );

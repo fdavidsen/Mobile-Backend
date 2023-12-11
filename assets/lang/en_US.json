@@ -1,0 +1,17 @@
+{
+    "Routine": "Routine",
+    "Work": "Work",
+    "Others" : "Others",
+    "finished" : "Finished",
+    "all_tasks_done" : "All Tasks Done",
+    "profile_team_apple" : "Apple Team",
+    "profile_task_finished" : "Task finished: %s",
+    "profile_our_members" : "Our Members",
+    "drawer_by_team_apple" : "by Apple Team",
+    "setting_dark_mode" : "Dark Mode",
+    "setting_button_change_language" : "Change language now",
+    "nav_todo": "Todos",
+    "nav_calendar": "Calendar",
+    "nav_concert": "Concert",
+    "nav_profile": "Profile"
+}
