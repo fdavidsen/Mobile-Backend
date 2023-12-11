@@ -169,7 +169,7 @@ class _MyDrawerState extends State<MyDrawer> {
             endIndent: 12,
             color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
           ),
-          const ListTile(title: LanguageDropdown()),
+          const LanguageDropdown(),
         ],
       ),
     );
