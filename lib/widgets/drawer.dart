@@ -56,36 +56,38 @@ class _MyDrawerState extends State<MyDrawer> {
       backgroundColor: context.watch<TodoProvider>().isDark ? const Color(0xff1e1e1e) : Colors.white,
       child: ListView(
         children: [
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        width: 40,
-                        margin: const EdgeInsets.only(right: 10),
-                        child: ClipRRect(borderRadius: BorderRadius.circular(4), child: Image.asset('assets/logo.png'))),
-                    Text(
-                      "Todo App",
-                      style: TextStyle(
-                          color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Text(
-                  "drawer_by_team_apple".i18n(),
-                  style: TextStyle(
-                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-                    fontSize: 15,
+          MergeSemantics(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          width: 40,
+                          margin: const EdgeInsets.only(right: 10),
+                          child: ClipRRect(borderRadius: BorderRadius.circular(4), child: Image.asset('assets/logo.png'))),
+                      Text(
+                        "Todo App",
+                        style: TextStyle(
+                            color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    "drawer_by_team_apple".i18n(),
+                    style: TextStyle(
+                      color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           Divider(
             indent: 12,

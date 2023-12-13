@@ -48,11 +48,14 @@ class _MemberState extends State<Member> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20, bottom: 10),
-            child: Text('profile_our_members'.i18n(),
-                style: TextStyle(
-                  fontSize: 18,
-                  color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
-                )),
+            child: Semantics(
+              label: 'Anggota Tim Apple',
+              child: Text('profile_our_members'.i18n(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
+                  )),
+            ),
           ),
           Divider(
             color: context.watch<TodoProvider>().isDark ? Colors.white : Colors.black,
