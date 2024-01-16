@@ -5,6 +5,7 @@ import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:apple_todo/screens/login.dart';
 import 'package:apple_todo/screens/todo/add_todo.dart';
 import 'package:apple_todo/screens/calendar.dart';
@@ -504,11 +505,22 @@ class _HomePageState extends State<HomePage> {
         visible: _selectedIndex != 1,
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) {
-                return const AddTodo(isAddNew: true);
-              },
-            ));
+            _loadInterstisialAd();
+            if (_isInterstitialReady) {
+              _interstitialAd.show();
+
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const AddTodo(isAddNew: true);
+                },
+              ));
+            } else {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const AddTodo(isAddNew: true);
+                },
+              ));
+            }
           },
           child: const Icon(Icons.add),
         ),
@@ -544,5 +556,26 @@ class _HomePageState extends State<HomePage> {
         othersFinishedTodoList: othersFinishedTodoList!,
       ),
     );
+  }
+
+  late InterstitialAd _interstitialAd;
+  bool _isInterstitialReady = false;
+
+  void _loadInterstisialAd() {
+    InterstitialAd.load(
+        adUnitId: 'ca-app-pub-3940256099942544/1033173712',
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) {
+            print('Close Interstitial Ad');
+          });
+          setState(() {
+            _isInterstitialReady = true;
+            _interstitialAd = ad;
+          });
+        }, onAdFailedToLoad: (err) {
+          _isInterstitialReady = false;
+          _interstitialAd.dispose();
+        }));
   }
 }

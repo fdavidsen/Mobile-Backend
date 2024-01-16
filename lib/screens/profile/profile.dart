@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:localization/localization.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:apple_todo/providers/todo_provider.dart';
 import 'package:apple_todo/screens/profile/weather.dart';
 import 'package:apple_todo/screens/profile/member.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -15,6 +16,34 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   List<String> categories = ["Routine", "Work", "Others"];
+
+  late BannerAd _bannerAd;
+  bool _isBannerReady = false;
+
+  @override
+  void initState() {
+    _loadBannedAd();
+    super.initState();
+  }
+
+  void _loadBannedAd() {
+    _bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, error) {
+            _isBannerReady = false;
+            ad.dispose();
+          },
+        ),
+        request: const AdRequest());
+    _bannerAd.load();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +53,17 @@ class _ProfileState extends State<Profile> {
         padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 85),
         child: Column(
           children: [
+            Container(
+                child: _isBannerReady
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          width: _bannerAd.size.width.toDouble(),
+                          height: _bannerAd.size.height.toDouble(),
+                          child: AdWidget(ad: _bannerAd),
+                        ),
+                      )
+                    : Container()),
             Card(
               color: context.watch<TodoProvider>().isDark ? Colors.black87 : Colors.white,
               child: Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:apple_todo/screens/splash_screen.dart';
 import 'package:apple_todo/providers/locale_provider.dart';
@@ -11,6 +12,7 @@ import 'package:apple_todo/utilities/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await Firebase.initializeApp();
 
   runApp(MultiProvider(providers: [
